@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import MainLayoutWrapper from "@/components/main-layout-wrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,9 +21,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`flex justify-center items-center min-h-screen bg-white ${geistSans.variable} ${geistMono.variable}`}
       >
-        {children}
+        <MainLayoutWrapper>{children}</MainLayoutWrapper>
       </body>
     </html>
   );
