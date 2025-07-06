@@ -18,9 +18,6 @@ export default async function ShopDetailsPage({ params }) {
       />
       <div className="text-gray-700 mb-1">평점: {shop.rating}점</div>
       <div className="text-gray-700 mb-4">리뷰 수: {shop.reviewCount}개</div>
-      <button className="bg-violet-600 text-white px-4 py-2 rounded-full">
-        채팅하기
-      </button>
     </div>
   );
 }
