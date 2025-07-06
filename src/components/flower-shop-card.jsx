@@ -1,10 +1,16 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
-export default function FlowerShopCard({ rating, reviewCount, image, name }) {
+export default function FlowerShopCard({
+  rating,
+  reviewCount,
+  image,
+  name,
+  slug,
+}) {
   return (
     <div className="w-[278px] rounded-xl border border-[#EBEBEAFF] bg-white overflow-hidden">
-      {/* 이미지 영역 */}
       <Image
         src={image}
         alt={name}
@@ -14,7 +20,6 @@ export default function FlowerShopCard({ rating, reviewCount, image, name }) {
         priority
       />
 
-      {/* 내용 영역 */}
       <div className="pt-4 p-4">
         <h3 className="font-bold text-lg">{name}</h3>
         <div className="flex items-center text-sm text-gray-600 mb-4 mt-1">
@@ -23,9 +28,11 @@ export default function FlowerShopCard({ rating, reviewCount, image, name }) {
             {rating} ({reviewCount} 리뷰)
           </span>
         </div>
-        <button className="w-full bg-gradient-to-r from-violet-500 to-pink-400 text-white py-2 rounded-full">
-          View Shop
-        </button>
+        <Link href={`/flower-shop/${slug}`}>
+          <button className="w-full bg-gradient-to-r from-violet-500 to-pink-400 text-white py-2 rounded-full cursor-pointer">
+            View Shop
+          </button>
+        </Link>
       </div>
     </div>
   );

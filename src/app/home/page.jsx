@@ -32,7 +32,7 @@ export default function HomePage() {
         </div>
       </div>
       <WhySection />
-      <FlowerShopList />
+      <FlowerShopList layout="scroll" />
     </>
   );
 }
