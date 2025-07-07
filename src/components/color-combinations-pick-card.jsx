@@ -2,7 +2,7 @@ import { combos } from "@/app/db/color-combinations-data";
 
 const picked = combos.find(c => c.id === "pick");
 
-export default function PickedCombinationCard() {
+export default function ColorCombinationsPickCard() {
   return (
     <div className="flex flex-col md:flex-row gap-6 bg-white rounded-xl shadow p-6">
       <img
