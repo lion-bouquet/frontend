@@ -1,4 +1,4 @@
-export default function ColorFilter() {
+export default function ColorCombinationsFilter() {
   const categories = ["All Combinations", "Warm Tones", "Cool Tones", "Pastels", "Vibrant"];
 
   return (

@@ -1,4 +1,4 @@
-export default function CombinationsCard({ combo }) {
+export default function ColorCombinationsCard({ combo }) {
   return (
     <div className="p-4 rounded-xl border border-[#EBEBEAFF] bg-white">
       <img
