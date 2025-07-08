@@ -5,7 +5,7 @@ import FlowerDetailCareGuide from "@/components/flower-detail-careguide";
 
 export default function FlowerDetailPick({ flower }) {
   return (
-    <div>
+    <div className= "-mt-10">
       {/* 상단 이미지 영역 */}
       <FlowerDetailPicture
         image={flower.image}
