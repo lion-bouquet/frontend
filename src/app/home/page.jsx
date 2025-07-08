@@ -1,6 +1,8 @@
+import FlowerList from "@/components/top-picks-flower-list";
 import FlowerShopList from "@/components/flower-shop-list";
 import HomeImg from "@/components/home-img";
 import WhySection from "@/components/why-section";
+import TopPicksFlowerList from "@/components/top-picks-flower-list";
 
 export default function HomePage() {
   return (
@@ -29,7 +31,19 @@ export default function HomePage() {
       </div>
 
       <WhySection />
+      <label className="block  text-black text-3xl font-bold mt-8 mb-4">
+        Today's Recommended Flower Shops
+      </label>
       <FlowerShopList layout="scroll" />
+
+      <label className="block  text-black text-3xl font-bold mt-8 mb-4">
+        Top Picks Just For You
+      </label>
+      <TopPicksFlowerList />
+
+      {/* <label className="block  text-black text-center text-3xl font-bold mt-[60px] mb-4">
+        Hear Form Our Happy Customers
+      </label> */}
     </>
   );
 }

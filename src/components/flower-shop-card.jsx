@@ -10,7 +10,7 @@ export default function FlowerShopCard({
   slug,
 }) {
   return (
-    <div className="w-[278px] rounded-xl border border-[#EBEBEAFF] bg-white overflow-hidden">
+    <div className="w-[264px] rounded-xl border border-[#EBEBEAFF] bg-white overflow-hidden">
       <Image
         src={image}
         alt={name}

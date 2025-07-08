@@ -48,7 +48,7 @@ export const topPicks = [
     slug: "classic-red-rose",
     price: "$15.00",
     description: "사랑과 열정",
-    image: "/images/dummy-img.png",
+    image: "/image/dummy-img.png",
   },
   {
     id: 2,
@@ -56,7 +56,7 @@ export const topPicks = [
     slug: "blushing-pink-peony",
     price: "$22.00",
     description: "부귀와 명예",
-    image: "/images/dummy-img.png",
+    image: "/image/dummy-img.png",
   },
   {
     id: 3,
@@ -64,7 +64,7 @@ export const topPicks = [
     slug: "elegant-white-lily",
     price: "$18.00",
     description: "순수함과 헌신",
-    image: "/images/dummy-img.png",
+    image: "/image/dummy-img.png",
   },
   {
     id: 4,
@@ -72,7 +72,7 @@ export const topPicks = [
     slug: "sunny-sunflower",
     price: "$12.00",
     description: "존경과 장수",
-    image: "/images/dummy-img.png",
+    image: "/image/dummy-img.png",
   },
   {
     id: 5,
@@ -80,14 +80,6 @@ export const topPicks = [
     slug: "purple-orchid",
     price: "$30.00",
     description: "고귀함과 아름다움",
-    image: "/images/dummy-img.png",
-  },
-  {
-    id: 6,
-    name: "화이트 데이지",
-    slug: "white-daisy",
-    price: "$8.00",
-    description: "순수함과 시작",
-    image: "/images/dummy-img.png",
+    image: "/image/dummy-img.png",
   },
 ];
