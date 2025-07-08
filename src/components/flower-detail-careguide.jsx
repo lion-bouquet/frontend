@@ -1,6 +1,6 @@
 "use client";
-
 import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function FlowerDetailCareGuide({ careGuide }) {
   const [openIndex, setOpenIndex] = useState(null);
@@ -21,18 +21,19 @@ export default function FlowerDetailCareGuide({ careGuide }) {
                 onClick={() => toggle(idx)}
                 className="w-full flex items-center justify-between text-left"
               >
-                <div className="flex items-center gap-2 text-black-500 font-medium">
-                  <span>{item.icon}</span>
+                {/* 아이콘 + 타이틀 영역 */}
+                <div className="flex items-center gap-2 text-black font-medium">
+                  <span className="text-lg leading-none">{item.icon}</span>
                   <span>{item.title}</span>
                 </div>
-                <span
-                  className={`transform transition-transform duration-200 ${
-                    isOpen ? "rotate-180" : "rotate-0"
-                  } text-gray-400`}
-                >
-                  ▼
+
+                {/* 토글 아이콘 */}
+                <span className="text-gray-400">
+                  {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                 </span>
               </button>
+
+              {/* 내용 */}
               {isOpen && (
                 <p className="mt-2 text-sm text-gray-600">{item.content}</p>
               )}

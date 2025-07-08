@@ -6,9 +6,8 @@ import FlowerDetailPick from "@/components/flower-detail-pick";
 import FlowerDetailVisualCard from "@/components/flower-detail-visual-card";
 import FlowerDetailFlowerCard from "@/components/flower-detail-flower-card";
 
-export default async function FlowerDetailPage({ params }) {
-  const { slug } = await params;
-  const flower = flowerDetail.find((f) => f.id === slug);
+export default function FlowerDetailPage({ params }) {
+  const flower = flowerDetail.find((f) => f.id === params.slug);
 
   if (!flower) {
     return (
@@ -24,7 +23,7 @@ export default async function FlowerDetailPage({ params }) {
       <FlowerDetailPick flower={flower} />
 
       {/* Visual Varieties */}
-      <div className="mt-20 text-center">
+      <div className="mt-2 text-center">
         <h2 className="text-3xl font-extrabold mb-2">Visual Varieties</h2>
         <p className="text-gray-500">
           Explore the subtle differences and exquisite details that make each{" "}
