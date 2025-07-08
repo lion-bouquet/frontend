@@ -6,8 +6,8 @@ import FlowerDetailPick from "@/components/flower-detail-pick";
 import FlowerDetailVisualCard from "@/components/flower-detail-visual-card";
 import FlowerDetailFlowerCard from "@/components/flower-detail-flower-card";
 
-export default function FlowerDetailPage() {
-  const flower = flowerDetail.find((f) => f.id === "cherry-blossom");
+export default function FlowerDetailPage({ params }) {
+  const flower = flowerDetail.find((f) => f.id === params.slug);
 
   if (!flower) {
     return (
@@ -26,7 +26,8 @@ export default function FlowerDetailPage() {
       <div className="mt-20 text-center">
         <h2 className="text-3xl font-extrabold mb-2">Visual Varieties</h2>
         <p className="text-gray-500">
-          Explore the subtle differences and exquisite details that make each cherry blossom unique.
+          Explore the subtle differences and exquisite details that make each{" "}
+          {flower.name} unique.
         </p>
       </div>
 
@@ -44,7 +45,8 @@ export default function FlowerDetailPage() {
       <div className="mt-20 text-center">
         <h2 className="text-2xl font-bold mb-2">Explore More Flowers</h2>
         <p className="text-gray-500">
-          Dive deeper into the world of flora. Discover other captivating flowers and their unique characteristics.
+          Dive deeper into the world of flora. Discover other captivating
+          flowers and their unique characteristics.
         </p>
       </div>
 
