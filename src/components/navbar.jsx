@@ -9,8 +9,7 @@ export default function Navbar() {
   const navItems = [
     { href: "/home", label: "홈" },
     { href: "/flower-shop", label: "꽃집들" },
-    { href: "/cart", label: "카트" },
-    { href: "/confirmation", label: "확인" },
+    { href: "/color-combinations", label: "색상 조합" },
   ];
 
   return (
@@ -35,7 +34,18 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center space-x-10">
+          <Link
+            href="/confirmation"
+            className={`${
+              pathname === "/confirmation"
+                ? "text-violet-600 font-semibold"
+                : "text-gray-700"
+            } text-sm hover:text-violet-500 transition-colors`}
+          >
+            주문 확인
+          </Link>
+
           <button className="px-4 py-1.5 border rounded-md text-sm font-medium hover:bg-gray-50">
             Sign In
           </button>
