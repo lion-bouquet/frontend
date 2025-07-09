@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function FlowerDetailCareGuide({ careGuide }) {
   const [openIndex, setOpenIndex] = useState(null);
+  const contentRefs = useRef([]);
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -34,9 +35,19 @@ export default function FlowerDetailCareGuide({ careGuide }) {
               </button>
 
               {/* 내용 */}
-              {isOpen && (
-                <p className="mt-2 text-sm text-gray-600">{item.content}</p>
-              )}
+              <div
+                ref={(el) => (contentRefs.current[idx] = el)}
+                style={{
+                  maxHeight: isOpen
+                    ? contentRefs.current[idx]?.scrollHeight + "px"
+                    : "0px",
+                  overflow: "hidden",
+                  transition: "max-height 0.4s ease",
+                }}
+                className="mt-2"
+              >
+                <p className="text-sm text-gray-600">{item.content}</p>
+              </div>
             </div>
           );
         })}
