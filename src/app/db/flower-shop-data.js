@@ -1,3 +1,5 @@
+import { flowerDetail } from "@/app/db/flower-detail-data";
+
 export const recommendedShops = [
   {
     id: 1,
@@ -6,6 +8,7 @@ export const recommendedShops = [
     rating: 4.8,
     reviewCount: 24,
     image: "/image/dummy-img.png",
+    flowers: flowerDetail,
   },
   {
     id: 2,
@@ -14,6 +17,7 @@ export const recommendedShops = [
     rating: 4.5,
     reviewCount: 12,
     image: "/image/dummy-img.png",
+    flowers: flowerDetail,
   },
   {
     id: 3,
@@ -22,6 +26,7 @@ export const recommendedShops = [
     rating: 4.9,
     reviewCount: 40,
     image: "/image/dummy-img.png",
+    flowers: flowerDetail,
   },
   {
     id: 4,
@@ -30,6 +35,7 @@ export const recommendedShops = [
     rating: 4.7,
     reviewCount: 8,
     image: "/image/dummy-img.png",
+    flowers: flowerDetail,
   },
   {
     id: 5,
@@ -38,6 +44,7 @@ export const recommendedShops = [
     rating: 4.6,
     reviewCount: 19,
     image: "/image/dummy-img.png",
+    flowers: flowerDetail,
   },
 ];
 
