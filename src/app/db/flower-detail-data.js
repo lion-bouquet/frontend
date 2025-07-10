@@ -157,7 +157,7 @@ export const flowerDetail = [
     id: "elegant-white-lily",
     name: "엘레강스 백합",
     scientificName: "Lilium candidum",
-    image: "/image/dummy-img3.jepg",
+    image: "/image/dummy-img3.jpeg",
     description: "순수함과 헌신",
     specifics: {
       species: "Lilium candidum",
@@ -206,7 +206,7 @@ export const flowerDetail = [
     id: "sunny-sunflower",
     name: "햇살 해바라기",
     scientificName: "Helianthus annuus",
-    image: "/image/white.png",
+    image: "/image/dummy-img3.jpeg",
     description: "존경과 장수",
     specifics: {
       species: "Helianthus annuus",

@@ -1,12 +1,16 @@
 "use client";
 
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
+import { cartTotalAtom } from "@/app/atoms/cartAtom";
 import { cartItemCountAtom } from "@/app/atoms/cartAtom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function OrderSummary() {
   const itemCount = useAtomValue(cartItemCountAtom);
+  const setCartTotal = useSetAtom(cartTotalAtom);
+
   const itemPrice = 77;
   const totalPrice = itemPrice * itemCount;
   const deliveryFee = 5;
@@ -14,7 +18,11 @@ export default function OrderSummary() {
 
   const pathname = usePathname();
   const segments = pathname.split("/");
-  const slug = segments[segments.length - 1]; // 예: "kkotgagae"
+  const slug = segments[segments.length - 1];
+
+  useEffect(() => {
+    setCartTotal(finalPrice);
+  }, [finalPrice]);
 
   return (
     <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">

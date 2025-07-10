@@ -3,15 +3,22 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ShoppingCart } from "lucide-react";
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { cartItemCountAtom, cartItemsAtom } from "@/app/atoms/cartAtom";
+import { usePathname } from "next/navigation";
 
 export default function ShopFlowerCard({ image, name, symbolism, slug }) {
   const [count, setCount] = useState(1);
   const setCartItemCount = useSetAtom(cartItemCountAtom);
   const dummyPrice = 77;
 
+  const cartItems = useAtomValue(cartItemsAtom);
+
   const setCartItems = useSetAtom(cartItemsAtom);
+
+  const pathname = usePathname();
+  const segments = pathname.split("/");
+  const shop = segments[segments.length - 1];
 
   function handleCountChange(change) {
     if (count === 1 && change === -1) return;
@@ -20,10 +27,7 @@ export default function ShopFlowerCard({ image, name, symbolism, slug }) {
 
   function handleAddToCart() {
     setCartItemCount((prev) => prev + count);
-    setCartItems((prev) => [
-      ...prev,
-      { slug, name, image, count }, // 필요한 정보만 넘기기
-    ]);
+    setCartItems((prev) => [...prev, { slug, name, image, count, shop }]);
   }
 
   return (
@@ -59,7 +63,7 @@ export default function ShopFlowerCard({ image, name, symbolism, slug }) {
 
         <button
           onClick={handleAddToCart}
-          className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-[#D3D6F3] via-[#E8DAF1] to-[#F5D5E2] text-white text-sm py-2 rounded-full shadow-sm hover:opacity-90 transition"
+          className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r cursor-pointer from-[#D3D6F3] via-[#E8DAF1] to-[#F5D5E2] text-white text-sm py-2 rounded-full shadow-sm hover:opacity-90 transition"
         >
           <ShoppingCart size={16} />
           Add to Cart

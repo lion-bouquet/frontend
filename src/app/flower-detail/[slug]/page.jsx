@@ -1,65 +1,81 @@
-import { flowerDetail } from "@/app/db/flower-detail-data";
-import { flowerDetailVisual } from "@/app/db/flower-detail-visual-data";
-import { flowerDetailFlower } from "@/app/db/flower-detail-flower-data";
+import Image from "next/image";
+import { recommendedShops } from "@/app/db/flower-shop-data";
+import ShopFlowerList from "@/components/shop-flower-list";
+import OrderSummary from "@/components/order-summary";
+import BackReloadClient from "@/components/back-reload-client"; // 👈 추가
 
-import FlowerDetailPick from "@/components/flower-detail-pick";
-import FlowerDetailVisualCard from "@/components/flower-detail-visual-card";
-import FlowerDetailFlowerCard from "@/components/flower-detail-flower-card";
-
-export default async function FlowerDetailPage({ params }) {
+export default async function ShopDetailsPage({ params }) {
   const { slug } = await params;
-  const flower = flowerDetail.find((f) => f.id === slug);
+  const shop = recommendedShops.find((shop) => shop.slug === slug);
 
-  if (!flower) {
-    return (
-      <div className="p-10 text-center text-red-500 text-xl">
-        Flower not found 😢
-      </div>
-    );
+  if (!shop) {
+    return <div className="p-6 text-red-600">존재하지 않는 가게입니다.</div>;
   }
 
   return (
-    <div className="p-8">
-      {/* 상단 꽃 정보 */}
-      <FlowerDetailPick flower={flower} />
+    <>
+      {/* 뒤로가기 감지 및 새로고침 */}
+      <BackReloadClient />
 
-      {/* Visual Varieties */}
-      <div className="mt-2 text-center">
-        <h2 className="text-3xl font-extrabold mb-2">Visual Varieties</h2>
-        <p className="text-gray-500">
-          Explore the subtle differences and exquisite details that make each{" "}
-          {flower.name} unique.
-        </p>
-      </div>
+      <div className="max-w-screen-xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* 왼쪽: 꽃집 소개 + 꽃 리스트 (3칸 차지) */}
+        <div className="lg:col-span-3 space-y-6">
+          {/* 꽃집 대표 이미지 */}
+          <div className="border border-[#EBEBEAFF] w-full rounded-xl overflow-hidden">
+            <Image
+              src={shop.image}
+              alt={shop.name}
+              width={800}
+              height={400}
+              className="w-full h-64 object-cover"
+              priority
+            />
+          </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
-        {flowerDetailVisual.map((item, idx) => (
-          <FlowerDetailVisualCard
-            key={idx}
-            image={item.image}
-            description={item.description}
-          />
-        ))}
-      </div>
+          {/* About Our Shop */}
+          <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">
+            <h2 className="text-xl font-semibold mb-2">About Our Shop</h2>
+            <p className="text-gray-700 text-sm leading-relaxed">
+              {shop.description || "꽃집 소개 내용이 아직 등록되지 않았습니다."}
+            </p>
 
-      {/* Explore More Flowers */}
-      <div className="mt-20 text-center">
-        <h2 className="text-2xl font-bold mb-2">Explore More Flowers</h2>
-        <p className="text-gray-500">
-          Dive deeper into the world of flora. Discover other captivating
-          flowers and their unique characteristics.
-        </p>
-      </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+              {[...Array(4)].map((_, i) => (
+                <Image
+                  key={i}
+                  src="/image/dummy-img.png"
+                  alt="shop"
+                  width={300}
+                  height={200}
+                  className="rounded-lg object-cover h-32 w-full"
+                />
+              ))}
+            </div>
+          </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-8">
-        {flowerDetailFlower.map((item, idx) => (
-          <FlowerDetailFlowerCard
-            key={idx}
-            image={item.image}
-            name={item.name}
-          />
-        ))}
+          {/* 꽃 리스트 */}
+          <ShopFlowerList shopFlowerList={shop.flowers} />
+        </div>
+
+        {/* 오른쪽: Order Summary + Contact */}
+        <div className="space-y-6 lg:col-span-1">
+          <OrderSummary />
+
+          <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">
+            <h3 className="text-lg font-semibold mb-4">Contact & Hours</h3>
+            <div className="text-sm text-gray-700 space-y-1">
+              <p>📞 +1 (555) 123-4567</p>
+              <p>📧 info@{shop.slug}.com</p>
+              <div className="mt-3">
+                <p className="font-medium mb-1">Opening Hours:</p>
+                <p>Mon–Fri: 9:00 AM – 6:00 PM</p>
+                <p>Sat: 10:00 AM – 4:00 PM</p>
+                <p>Sun: Closed</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
