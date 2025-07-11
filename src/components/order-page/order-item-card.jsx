@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Trash2 } from "lucide-react";
 
 export default function OrderItemCard({
   item,
@@ -33,40 +34,38 @@ export default function OrderItemCard({
   };
 
   return (
-    <div className="flex gap-4 items-center border-b pb-4">
+    <div className="flex items-center gap-6 border border-[#ebebea] p-6 py-5 rounded-lg">
       <Image
         src={item.image}
         alt={item.name}
         width={96}
         height={96}
-        className="rounded object-cover"
+        className="w-32 h-32 object-cover rounded-lg border border-[#ebebea]"
       />
-      <div className="flex-1">
-        <h4 className="font-semibold">{item.name}</h4>
-        <p className="text-sm text-gray-600">수량: {item.count}</p>
-        <p className="text-sm text-gray-600">
-          총 가격: ${(item.count * dummyPrice).toFixed(2)}
-        </p>
 
-        <div className="flex gap-2 mt-2">
-          <button
-            className="border px-2 rounded"
-            onClick={() => updateCount(-1)}
-          >
-            −
-          </button>
-          <span>{item.count}</span>
-          <button
-            className="border px-2 rounded"
-            onClick={() => updateCount(1)}
-          >
-            +
-          </button>
-          <button className="text-red-500 ml-4 text-sm" onClick={handleDelete}>
-            🗑 삭제
-          </button>
-        </div>
+      <div className="flex flex-col">
+        <h4 className="font-semibold">{item.name}</h4>
+        <p className="text-sm text-gray-600">
+          Pirce: ${(item.count * dummyPrice).toFixed(2)}
+        </p>
       </div>
+
+      <div className="flex items-center gap-2 ml-auto border border-[#ebebea] rounded-xl px-4 py-2">
+        <button className="mx-2 cursor-pointer" onClick={() => updateCount(-1)}>
+          −
+        </button>
+        <span>{item.count}</span>
+        <button className="mx-2 cursor-pointer" onClick={() => updateCount(1)}>
+          +
+        </button>
+      </div>
+
+      <button
+        className="text-[#8b8c8a] text-sm ml-4 cursor-pointer"
+        onClick={handleDelete}
+      >
+        <Trash2 size={20} />
+      </button>
     </div>
   );
 }

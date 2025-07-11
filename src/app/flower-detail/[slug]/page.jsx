@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { recommendedShops } from "@/app/db/flower-shop-data";
 import ShopFlowerList from "@/components/shop-flower-list";
-import OrderSummary from "@/components/order-summary";
+import OrderSummary from "@/components/order-page/order-summary";
 import BackReloadClient from "@/components/back-reload-client"; // 👈 추가
 
 export default async function ShopDetailsPage({ params }) {

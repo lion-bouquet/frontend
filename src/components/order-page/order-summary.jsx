@@ -7,14 +7,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-export default function OrderSummary() {
+export default function OrderSummary({ mode = "compact", totalCartPrice }) {
   const itemCount = useAtomValue(cartItemCountAtom);
   const setCartTotal = useSetAtom(cartTotalAtom);
 
   const itemPrice = 77;
   const totalPrice = itemPrice * itemCount;
   const deliveryFee = 5;
-  const finalPrice = totalPrice + deliveryFee;
+  const discount = 0;
+  const finalPrice = totalPrice + deliveryFee - discount;
 
   const pathname = usePathname();
   const segments = pathname.split("/");
@@ -23,6 +24,42 @@ export default function OrderSummary() {
   useEffect(() => {
     setCartTotal(finalPrice);
   }, [finalPrice]);
+
+  if (mode === "detailed") {
+    return (
+      <>
+        {totalCartPrice === 0 && (
+          <div className="text-gray-500 text-center py-4">No items in cart</div>
+        )}
+
+        <div className="bg-white border border-[#ebebea] rounded-xl p-6 space-y-4">
+          <h3 className="text-xl font-bold">Order Summary</h3>
+
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between items-center">
+              <span className="text-gray-600">Subtotal</span>
+              <span className="font-medium">${totalCartPrice.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-600">Discount</span>
+              <span className="text-red-500">-${discount.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <div className="border-t pt-4 flex justify-between items-center">
+            <span className="font-bold text-lg">Total</span>
+            <span className="text-pink-500 text-2xl font-bold">
+              ${totalCartPrice.toFixed(2)}
+            </span>
+          </div>
+
+          <button className="w-full mt-4 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200">
+            예약하기
+          </button>
+        </div>
+      </>
+    );
+  }
 
   return (
     <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">

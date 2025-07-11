@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { recommendedShops } from "@/app/db/flower-shop-data";
 import ShopFlowerList from "@/components/shop-flower-list";
-import OrderSummary from "@/components/order-summary";
+import OrderSummary from "@/components/order-page/order-summary";
 import BackReloadClient from "@/components/BackReloadClient";
 
 export default async function ShopDetailsPage({ params }) {
@@ -57,7 +57,7 @@ export default async function ShopDetailsPage({ params }) {
 
         {/* 오른쪽: Order Summary + Contact */}
         <div className="space-y-6 lg:col-span-1">
-          <OrderSummary />
+          <OrderSummary mode="compact" />
 
           {/* Contact & Hours */}
           <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">
