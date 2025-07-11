@@ -1,6 +1,11 @@
 import { Info } from "lucide-react";
 
-export default function CustomerInformation() {
+export default function CustomerInformation({
+  name,
+  setName,
+  phone,
+  setPhone,
+}) {
   return (
     <div className="p-6 space-y-6 border border-[#ebebea] rounded-lg">
       <h2 className="text-2xl font-bold">Customer Information</h2>
@@ -14,6 +19,8 @@ export default function CustomerInformation() {
             <input
               type="text"
               placeholder="Anya Sharma"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
@@ -25,6 +32,8 @@ export default function CustomerInformation() {
             <input
               type="tel"
               placeholder="+1 (555) 123-4567"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>

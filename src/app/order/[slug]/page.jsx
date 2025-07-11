@@ -10,7 +10,7 @@ import {
 
 import OrderItemCard from "@/components/order-page/order-item-card";
 import DeliveryPickupOptions from "@/components/order-page/delivery-pickup-options";
-import CoustomerInformation from "@/components/order-page/customer-imformation";
+import CustomerInformation from "@/components/order-page/customer-imformation";
 import OrderSummary from "@/components/order-page/order-summary";
 
 export default function OrderPage() {
@@ -22,6 +22,10 @@ export default function OrderPage() {
   const [localTotal, setLocalTotal] = useState(0);
   const [localCartItemCount, setLocalCartItemCount] = useState(0);
 
+  //CustomerInformation 상태 끌어올리기
+  const [customerName, setCustomerName] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
+
   useEffect(() => {
     setLocalItems(cartItems);
     setLocalTotal(cartTotal);
@@ -32,6 +36,19 @@ export default function OrderPage() {
     setCartTotal(0);
     setCartItemCount(0);
   }, []);
+
+  function handleReserve() {
+    const payload = {
+      name: customerName,
+      phone: customerPhone,
+      total: localTotal,
+      items: localItems.map((item) => ({
+        name: item.name,
+        count: item.count,
+      })),
+    };
+    console.log("예약 정보 전송:", payload);
+  }
 
   return (
     <div className="p-6 space-y-6">
@@ -52,9 +69,18 @@ export default function OrderPage() {
 
       <DeliveryPickupOptions />
 
-      <CoustomerInformation />
+      <CustomerInformation
+        name={customerName}
+        setName={setCustomerName}
+        phone={customerPhone}
+        setPhone={setCustomerPhone}
+      />
 
-      <OrderSummary mode={"detailed"} totalCartPrice={localTotal} />
+      <OrderSummary
+        mode={"detailed"}
+        totalCartPrice={localTotal}
+        onReserve={handleReserve}
+      />
 
       <div className="text-right text-xl font-bold">
         총 합계: ${localTotal.toFixed(2)}
