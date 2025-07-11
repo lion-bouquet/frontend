@@ -5,6 +5,14 @@ export default function CustomerInformation({
   setName,
   phone,
   setPhone,
+  nameErrorMsg,
+  phoneErrorMsg,
+  shakeName,
+  shakePhone,
+  agree,
+  setAgree,
+  agreeErrorMsg,
+  shakeAgree,
 }) {
   return (
     <div className="p-6 space-y-6 border border-[#ebebea] rounded-lg">
@@ -18,11 +26,20 @@ export default function CustomerInformation({
             </label>
             <input
               type="text"
-              placeholder="Anya Sharma"
+              placeholder="홍길동"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
             />
+            {nameErrorMsg && (
+              <p
+                className={`text-red-500 text-sm mt-1 ${
+                  shakeName ? "shake" : ""
+                }`}
+              >
+                {nameErrorMsg}
+              </p>
+            )}
           </div>
 
           <div>
@@ -31,11 +48,21 @@ export default function CustomerInformation({
             </label>
             <input
               type="tel"
-              placeholder="+1 (555) 123-4567"
+              placeholder="01012345678"
+              maxLength={11}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
             />
+            {phoneErrorMsg && (
+              <p
+                className={`text-red-500 text-sm mt-1 ${
+                  shakePhone ? "shake" : ""
+                }`}
+              >
+                {phoneErrorMsg}
+              </p>
+            )}
           </div>
         </div>
 
@@ -46,7 +73,12 @@ export default function CustomerInformation({
           </label>
 
           <label className="flex items-center gap-2">
-            <input type="checkbox" className="w-4 h-4 border-gray-400" />
+            <input
+              type="checkbox"
+              className="w-4 h-4 border-gray-400"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+            />
             <span>개인정보동의</span>
           </label>
         </div>
@@ -55,6 +87,15 @@ export default function CustomerInformation({
           <Info className="w-5 h-5 text-gray-500" />
           <span>정보 동의 관련 문구</span>
         </div>
+        {agreeErrorMsg && (
+          <p
+            className={`text-red-500 text-sm mt-1  ${
+              shakeAgree ? "shake" : ""
+            }`}
+          >
+            {agreeErrorMsg}
+          </p>
+        )}
       </form>
     </div>
   );

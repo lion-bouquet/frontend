@@ -32,10 +32,6 @@ export default function OrderSummary({
   if (mode === "detailed") {
     return (
       <>
-        {totalCartPrice === 0 && (
-          <div className="text-gray-500 text-center py-4">No items in cart</div>
-        )}
-
         <div className="bg-white border border-[#ebebea] rounded-xl p-6 space-y-4">
           <h3 className="text-xl font-bold">Order Summary</h3>
 
@@ -59,7 +55,7 @@ export default function OrderSummary({
 
           <button
             onClick={onReserve}
-            className="w-full mt-4 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200"
+            className="w-full cursor-pointer mt-4 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200"
           >
             예약하기
           </button>
