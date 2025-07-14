@@ -6,8 +6,9 @@ import FlowerDetailPick from "@/components/flower-detail-pick";
 import FlowerDetailVisualCard from "@/components/flower-detail-visual-card";
 import FlowerDetailFlowerCard from "@/components/flower-detail-flower-card";
 
-export default function FlowerDetailPage() {
-  const flower = flowerDetail.find((f) => f.id === "cherry-blossom");
+export default async function FlowerDetailPage({ params }) {
+  const { slug } = await params;
+  const flower = flowerDetail.find((f) => f.id === slug);
 
   if (!flower) {
     return (

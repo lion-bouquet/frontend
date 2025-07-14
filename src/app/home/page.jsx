@@ -3,6 +3,7 @@ import FlowerShopList from "@/components/flower-shop-list";
 import HomeImg from "@/components/home-img";
 import WhySection from "@/components/why-section";
 import TopPicksFlowerList from "@/components/top-picks-flower-list";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -20,12 +21,14 @@ export default function HomePage() {
               Discover the freshest blooms and unique arrangements from local
               artisans, delivered to your door.
             </p>
-            <button
-              id="liquid-glass-button"
-              className="bg-gradient-to-r from-violet-500 to-pink-400 text-white px-6 py-2 rounded-full shadow"
-            >
-              Shop Now
-            </button>
+            <Link href="/flower-shop">
+              <button
+                id="liquid-glass-button"
+                className="bg-gradient-to-r from-violet-500 to-pink-400 text-white px-6 py-2 rounded-full shadow cursor-pointer"
+              >
+                Shop Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>

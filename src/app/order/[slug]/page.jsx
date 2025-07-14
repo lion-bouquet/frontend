@@ -101,9 +101,11 @@ export default function OrderPage() {
       return;
     }
 
+    //POST
     const payload = {
       shop: slug,
       name: customerName,
+      //userId: userId 로그인 기능 추가시
       phone: customerPhone,
       total: localTotal,
       items: localItems.map((item) => ({

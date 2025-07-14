@@ -1,14 +1,14 @@
 "use client";
 
-import { Store, Sun, Leaf, BadgeCheck } from "lucide-react";
+import { Store, MessageSquareText, Star, ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import clsx from "clsx";
+import clsx from "clsx"; // ✅ 빠졌다면 꼭 추가!
 
 const buttons = [
   { id: "all", label: "All Shops", icon: Store },
-  { id: "review", label: "리뷰 많은 순", icon: Sun },
-  { id: "rating", label: "평점 높은 순", icon: Leaf },
-  { id: "order", label: "주문 많은 순", icon: BadgeCheck },
+  { id: "review", label: "리뷰 많은 순", icon: MessageSquareText },
+  { id: "rating", label: "평점 높은 순", icon: Star },
+  { id: "order", label: "주문 많은 순", icon: ShoppingCart },
 ];
 
 export default function SortButtons() {
