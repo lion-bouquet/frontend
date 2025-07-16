@@ -46,7 +46,13 @@ export default function Navbar() {
             주문 확인
           </Link>
 
-          <button className="px-4 py-1.5 border rounded-md text-sm font-medium hover:bg-gray-50">
+          <button
+            onClick={() =>
+              (window.location.href =
+                "https://likelion.patulus.com/oauth2/authorization/google")
+            }
+            className="px-4 py-1.5 border rounded-md text-sm font-medium cursor-pointer hover:bg-gray-50"
+          >
             Sign In
           </button>
         </div>
