@@ -59,7 +59,7 @@ export default function LoginButton() {
         >
           <span>{user.name}님</span>
           <Image
-            src={user.profileImage || "/image/default-avatar.png"}
+            src={user.profileImage}
             alt="프로필 이미지"
             width={32}
             height={32}
