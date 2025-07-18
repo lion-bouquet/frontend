@@ -5,17 +5,14 @@ import clsx from "clsx";
 
 export default function FlowerShopCard({
   rating,
-  reviewCount,
   image,
   name,
   slug,
   address,
-  distance,
   isOpen,
 }) {
   return (
     <div className="w-full max-w-full rounded-xl border border-[#EBEBEAFF] bg-white overflow-hidden">
-
       <Image
         src={image}
         alt={name}
@@ -25,20 +22,19 @@ export default function FlowerShopCard({
         priority
       />
 
-
       <div className="pt-4 px-4 pb-4 flex flex-col gap-1">
-
         <div className="flex justify-between items-start">
           <h3 className="font-bold text-[16px]">{name}</h3>
           <div className="flex items-center text-sm text-gray-600">
-            <Star className="w-4 h-4 text-yellow-400 mr-1" fill="currentColor" />
+            <Star
+              className="w-4 h-4 text-yellow-400 mr-1"
+              fill="currentColor"
+            />
             <span className="text-[13px]">{rating}</span>
           </div>
         </div>
 
-
         <p className="text-sm text-gray-600">{address}</p>
-        <p className="text-sm text-gray-600">{distance}</p>
         <p
           className={clsx(
             "text-sm font-semibold",
@@ -47,7 +43,6 @@ export default function FlowerShopCard({
         >
           {isOpen ? "Open Now" : "Closed"}
         </p>
-
 
         <div className="flex justify-end mt-1">
           <Link href={`/flower-shop/${slug}`}>

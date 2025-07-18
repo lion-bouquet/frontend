@@ -10,14 +10,12 @@ export default function OrderConfirmationPage() {
         <OrderThankYouHeader />
       </div>
       <div className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-        구매정보
-        </h2>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">구매정보</h2>
         <OrderSummary />
       </div>
       <div className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-        픽업 시간 안내
+          픽업 시간 안내
         </h2>
         <OrderPickTime />
       </div>
