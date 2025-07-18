@@ -8,6 +8,9 @@ export const recommendedShops = [
     rating: 4.8,
     reviewCount: 24,
     image: "/image/dummy-img.png",
+    address: "서울시 중구",
+    distance: "1.2km",
+    isOpen: true,
     flowers: flowerDetail,
   },
   {
@@ -17,6 +20,9 @@ export const recommendedShops = [
     rating: 4.5,
     reviewCount: 12,
     image: "/image/dummy-img.png",
+    address: "서울시 강남구",
+    distance: "2.5km",
+    isOpen: false,
     flowers: flowerDetail,
   },
   {
@@ -26,6 +32,9 @@ export const recommendedShops = [
     rating: 4.9,
     reviewCount: 40,
     image: "/image/dummy-img.png",
+    address: "서울시 서대문구",
+    distance: "950m",
+    isOpen: true,
     flowers: flowerDetail,
   },
   {
@@ -35,6 +44,9 @@ export const recommendedShops = [
     rating: 4.7,
     reviewCount: 8,
     image: "/image/dummy-img.png",
+    address: "서울시 영등포구",
+    distance: "3.0km",
+    isOpen: false,
     flowers: flowerDetail,
   },
   {
@@ -44,9 +56,13 @@ export const recommendedShops = [
     rating: 4.6,
     reviewCount: 19,
     image: "/image/dummy-img.png",
+    address: "서울시 마포구",
+    distance: "2.1km",
+    isOpen: true,
     flowers: flowerDetail,
   },
 ];
+
 
 export const topPicks = [
   {

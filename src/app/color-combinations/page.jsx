@@ -1,6 +1,5 @@
 import ColorCombinationsPickCard from "@/components/color-combinations-pick-card";
 import ColorCombinationsCard from "@/components/color-combinations-card";
-import ColorCombinationsFilter from "@/components/color-combinations-filter";
 import ColorHowPick from "@/components/color-how-pick";
 import { combos } from "@/app/db/color-combinations-data";
 
@@ -18,8 +17,7 @@ export default function ColorCombinationsPage() {
         <ColorCombinationsPickCard />
       </div>
 
-      {/* Explore by Mood & Style */}
-      <ColorCombinationsFilter />
+
 
       {/* 추천 리스트 */}
       <h2 className="text-2xl font-bold mb-6">컬러 조합 추천</h2>

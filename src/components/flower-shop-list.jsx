@@ -1,38 +1,29 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { recommendedShops } from "@/app/db/flower-shop-data";
 import FlowerShopCard from "./flower-shop-card";
 
-export default function FlowerShopList() {
-  const [shops, setShops] = useState([]);
+export default function FlowerShopList({ layout = "grid" }) {
+  const containerClass =
+    layout === "scroll"
+      ? "flex overflow-x-auto gap-5 px-2"
+      : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full";
 
-  useEffect(() => {
-    fetch("https://likelion.patulus.com/shops", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("✅ 데이터:", data);
-        setShops(Array.isArray(data) ? data : []);
-      })
-      .catch((err) => {
-        console.error("❌ 오류:", err);
-      });
-  }, []);
+  const itemClass = layout === "scroll" ? "flex-shrink-0 w-[300px]" : "";
 
   return (
-    <div className="flex flex-wrap gap-5">
-      {shops.map((item) => (
-        <FlowerShopCard
-          key={item.id}
-          name={item.shopName}
-          image={item.image ?? "/image/dummy-img.png"}
-          rating={item.rating}
-          reviewCount={item.reviewCount ?? 0}
-          slug={item.id}
-        />
+    <div className={containerClass}>
+      {recommendedShops.map((item) => (
+        <div key={item.id} className={itemClass}>
+          <FlowerShopCard
+            name={item.name}
+            image={item.image}
+            rating={item.rating}
+            reviewCount={item.reviewCount}
+            slug={item.slug}
+            address={item.address}
+            distance={item.distance}
+            isOpen={item.isOpen}
+          />
+        </div>
       ))}
     </div>
   );

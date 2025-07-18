@@ -3,16 +3,16 @@ import { topPicks } from "@/app/db/flower-shop-data";
 
 export default function TopPicksFlowerList() {
   return (
-    <div className="flex justify-between">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {topPicks.map((item) => (
-        <div key={item.id}>
-          <FlowerCard
-            image={item.image}
-            name={item.name}
-            description={item.description}
-            slug={item.slug}
-          />
-        </div>
+        <FlowerCard
+          key={item.id}
+          image={item.image}
+          name={item.name}
+          description={item.description}
+          price={item.price}
+          slug={item.slug}
+        />
       ))}
     </div>
   );
