@@ -1,3 +1,5 @@
+// app/page.jsx 또는 HomePage 컴포넌트
+
 import FlowerList from "@/components/top-picks-flower-list";
 import FlowerShopList from "@/components/flower-shop-list";
 import HomeImg from "@/components/home-img";
@@ -12,21 +14,29 @@ export default function HomePage() {
         <HomeImg />
 
         <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-white/90 via-white/60 to-transparent pointer-events-none z-20" />
-        <div className="absolute inset-0 z-30 flex items-center px-8">
-          <div className="max-w-screen-md px-[50px]">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+
+        <div className="absolute inset-0 z-30 flex items-end justify-between px-8 pb-10">
+          <div className="max-w-screen-md px-[50px] pb-0">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
               Experience Floral Grandeur
             </h1>
-            <p className="text-lg text-gray-600 mb-6">
+            <p className="text-lg text-gray-600">
               Discover the freshest blooms and unique arrangements from local
               artisans, delivered to your door.
             </p>
+          </div>
+
+          <div className="pr-[5px]">
             <Link href="/flower-shop">
               <button
-                id="liquid-glass-button"
-                className="bg-gradient-to-r from-violet-500 to-pink-400 text-white px-6 py-2 rounded-full shadow cursor-pointer"
+                className="text-sm font-semibold rounded-full px-6 py-2 text-[#333] shadow"
+                style={{
+                  minWidth: "200px",
+                  background:
+                    "linear-gradient(135deg, #BEDEF2 0%, #D1DCF6 30%, #D8CDEE 70%, #F5D5E2 100%)",
+                }}
               >
-                Shop Now
+                상세보기
               </button>
             </Link>
           </div>
@@ -34,19 +44,16 @@ export default function HomePage() {
       </div>
 
       <WhySection />
-      <label className="block  text-black text-3xl font-bold mt-8 mb-4">
-        Today's Recommended Flower Shops
+
+      <label className="block text-black text-3xl font-bold mt-8 mb-4">
+        오늘의 추천 꽃집
       </label>
       <FlowerShopList layout="scroll" />
 
-      <label className="block  text-black text-3xl font-bold mt-8 mb-4">
-        Top Picks Just For You
+      <label className="block text-black text-3xl font-bold mt-8 mb-4">
+        당신만을 위한 꽃 추천
       </label>
       <TopPicksFlowerList />
-
-      {/* <label className="block  text-black text-center text-3xl font-bold mt-[60px] mb-4">
-        Hear Form Our Happy Customers
-      </label> */}
     </>
   );
 }

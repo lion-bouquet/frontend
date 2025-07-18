@@ -36,14 +36,14 @@ export default function Navbar() {
 
         <div className="ml-auto flex items-center space-x-10">
           <Link
-            href="/confirmation"
+            href="/order-list"
             className={`${
-              pathname === "/confirmation"
+              pathname === "/order-list"
                 ? "text-violet-600 font-semibold"
                 : "text-gray-700"
             } text-sm hover:text-violet-500 transition-colors`}
           >
-            주문 확인
+            주문 내역
           </Link>
 
           <button

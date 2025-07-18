@@ -5,9 +5,9 @@ export default function FlowerShopList({ layout = "grid" }) {
   const containerClass =
     layout === "scroll"
       ? "flex overflow-x-auto gap-5 px-2"
-      : "flex flex-wrap gap-5";
+      : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full";
 
-  const itemClass = layout === "scroll" ? "flex-shrink-0" : "";
+  const itemClass = layout === "scroll" ? "flex-shrink-0 w-[300px]" : "";
 
   return (
     <div className={containerClass}>
@@ -19,6 +19,9 @@ export default function FlowerShopList({ layout = "grid" }) {
             rating={item.rating}
             reviewCount={item.reviewCount}
             slug={item.slug}
+            address={item.address}
+            distance={item.distance}
+            isOpen={item.isOpen}
           />
         </div>
       ))}

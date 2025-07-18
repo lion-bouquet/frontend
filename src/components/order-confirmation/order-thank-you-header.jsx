@@ -1,14 +1,21 @@
 export default function OrderThankYouHeader() {
   return (
-    <div className="bg-gradient-to-r from-[#8DCAF1] to-[#F5D5E2] text-center py-16 rounded-xl shadow">
-      <h1 className="text-4xl font-extrabold text-white mb-2">Thank you for your Bloom Buddy Purchase!</h1>
-      <p className="text-md text-white">
-        Your order has been successfully placed. A detailed confirmation
+    <div
+      className="text-center py-16 rounded-xl shadow"
+      style={{
+        background: "linear-gradient(135deg, #BEDEF2 0%, #D1DCF6 30%, #D8CDEE 70%, #F5D5E2 100%)"
+      }}
+    >
+      <h1 className="text-lg font-extrabold mb-2" style={{ color: "#7A75E3" }}>
+        BB-20241124-7890
+      </h1>
+      <h2 className="text-xl font-bold" style={{ color: "#5b5967" }}>
+        주문이 완료되었습니다!
+      </h2>
+      <p style={{ color: "#5b5967", marginTop: "8px", fontSize: "10px" }}>
+        주문이 정상적으로 완료되었습니다. 관련 내역은 이메일을 통해 다시 한 번 안내드리며,
+        문제가 있을 경우 언제든지 고객센터로 문의해주세요.
       </p>
-      <p className="text-md text-white">
-        and receipt have been sent to your email address.
-      </p>
-      
     </div>
   );
 }

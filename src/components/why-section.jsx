@@ -25,8 +25,8 @@ export default function WhySection() {
   return (
     <section className="py-16 bg-white w-full">
       <div className="max-w-none px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Why Bloom Buddy?
+        <h2 className="text-3xl font-bold text-left mb-12">
+          '꽃길'은 이렇게 사용할 수 있어요!
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
           {features.map((item) => (
