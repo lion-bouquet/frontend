@@ -1,6 +1,10 @@
 import Image from "next/image";
 import OrderSummary from "@/components/order-page/order-summary";
 import ShopFlowerList from "@/components/shop-flower-list";
+import ReviewCard from "@/components/order-page/review-list";
+import ReviewList from "@/components/order-page/review-list";
+import ReviewSection from "@/components/order-page/review-section";
+import ShopIntroduction from "@/components/order-page/shop-introduction";
 
 export default async function ShopDetailsPage({ params }) {
   const { slug } = await params;
@@ -62,31 +66,20 @@ export default async function ShopDetailsPage({ params }) {
         </div>
 
         {/* About Our Shop */}
-        <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">
-          <h2 className="text-xl font-semibold mb-2">About Our Shop</h2>
-          <p className="text-gray-700 text-sm leading-relaxed">
-            {shop.introduction || "꽃집 소개 내용이 아직 등록되지 않았습니다."}
-          </p>
+        <ShopIntroduction shop={shop} />
 
-          {shop.images?.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-              {shop.images.map((img, i) => (
-                <Image
-                  key={i}
-                  src={img}
-                  alt={`shop-img-${i}`}
-                  width={300}
-                  height={200}
-                  className="rounded-lg object-cover h-32 w-full"
-                  sizes="(max-width: 768px) 100vw, 25vw"
-                />
-              ))}
-            </div>
-          )}
-        </div>
+        {/* 리뷰 */}
+        <h3 className="text-xl font-extrabold text-[#403e3e]">평점 & 리뷰:</h3>
+        <ReviewSection
+          rating={shop.rating}
+          reviewCount={shop.reviewCount}
+          shopId={shop.id}
+        />
 
-        {/* 향후: 꽃 리스트 연결 자리 */}
-        {/* <ShopFlowerList shopFlowerList={shop.flowers} /> */}
+        {/* 꽃집 판매 꽃 목록 */}
+        <h3 className="text-xl font-extrabold text-[#403e3e]">
+          꽃을 선택하세요
+        </h3>
         <ShopFlowerList shopFlowerList={flowers} />
       </div>
 

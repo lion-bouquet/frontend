@@ -17,7 +17,7 @@ export default function OrderSummary({
 
   const itemPrice = 77;
   const totalPrice = itemPrice * itemCount;
-  const deliveryFee = 5;
+  const deliveryFee = 0;
   const discount = 0;
   const finalPrice = totalPrice + deliveryFee - discount;
 

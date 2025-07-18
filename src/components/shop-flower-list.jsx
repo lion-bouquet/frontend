@@ -8,7 +8,8 @@ export default function ShopFlowerList({ shopFlowerList }) {
       {shopFlowerList.map((item) => (
         <div key={item.stockId}>
           <ShopFlowerCard
-            image={item.flower.imageUrl}
+            // image={item.flower.imageUrl}
+            image={"/imgae/dummy-img.png"}
             name={item.flower.name}
             symbolism={item.flower.flowerLanguage}
             slug={item.stockId.toString()}

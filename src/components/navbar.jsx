@@ -18,7 +18,9 @@ export default function Navbar() {
       <div className="max-w-screen-xl mx-auto flex items-center px-4 py-3">
         <div className="flex items-center space-x-2">
           <img src="/logo.svg" alt="Logo" className="w-6 h-6" />
-          <span className="font-bold text-lg">꽃 길</span>
+          <Link href={"/home"}>
+            <span className="font-bold text-lg cursor-pointer">꽃 길</span>
+          </Link>
         </div>
 
         <div className="flex space-x-6 text-sm font-medium text-gray-700 ml-12">
