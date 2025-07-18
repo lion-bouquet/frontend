@@ -5,6 +5,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { userAtom } from "@/app/atoms/userAtom";
 import { authAtom } from "@/app/atoms/authAtom";
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginButton() {
   const user = useAtomValue(userAtom);
@@ -12,6 +13,7 @@ export default function LoginButton() {
   const setAuth = useSetAtom(authAtom);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const wrapperRef = useRef(null);
+  const router = useRouter();
 
   const handleLogout = async () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -34,6 +36,7 @@ export default function LoginButton() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setIsMenuOpen(false);
+    router.replace("/home");
   };
 
   // 바깥 클릭 시 메뉴 닫기

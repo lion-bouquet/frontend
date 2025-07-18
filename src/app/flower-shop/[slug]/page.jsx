@@ -1,34 +1,46 @@
 import Image from "next/image";
 import OrderSummary from "@/components/order-page/order-summary";
+import ShopFlowerList from "@/components/shop-flower-list";
 
 export default async function ShopDetailsPage({ params }) {
-  const { slug } = await params; // 최신 Next.js에서도 문제 없음
-  console.log("slug:", slug);
+  const { slug } = await params;
 
   let shop = null;
+  let flowers = [];
 
   try {
-    const res = await fetch(`https://likelion.patulus.com/shops/${slug}`, {
-      cache: "no-store",
-    });
+    // 1. 가게 정보 & 꽃 리스트 동시 요청
+    const [shopRes, flowerRes] = await Promise.all([
+      fetch(`https://likelion.patulus.com/shops/${slug}`, {
+        cache: "no-store",
+      }),
+      fetch(`https://likelion.patulus.com/shops/${slug}/stocks`, {
+        cache: "no-store",
+      }),
+    ]);
 
-    if (!res.ok) {
-      throw new Error("Shop not found");
+    // 2. 가게 정보 처리
+    if (!shopRes.ok)
+      throw new Error("❌ 가게 정보를 불러오는 데 실패했습니다.");
+    const shopJson = await shopRes.json();
+    shop = shopJson;
+    if (!shop || !shop.id)
+      throw new Error("❌ 유효하지 않은 가게 데이터입니다.");
+
+    // 3. 꽃 리스트 처리
+    if (flowerRes.ok) {
+      const flowerJson = await flowerRes.json();
+      flowers = flowerJson?.data || [];
+    } else {
+      console.warn("⚠️ 꽃 리스트 불러오기 실패");
     }
-
-    shop = await res.json(); // ✅ 여기선 선언 없이 대입만!
-    console.log("shop:", shop);
-
-    if (!shop || !shop.id) {
-      return <div className="p-6 text-red-600">존재하지 않는 가게입니다1.</div>;
-    }
-  } catch (err) {
-    console.error("❌ 꽃집 정보를 불러오지 못했습니다:", err);
-    return <div className="p-6 text-red-600">존재하지 않는 가게입니다2.</div>;
+  } catch (error) {
+    console.error("에러:", error);
+    return <div className="p-6 text-red-600">존재하지 않는 가게입니다.</div>;
   }
 
   if (!shop) {
-    return <div className="p-6 text-red-600">존재하지 않는 가게입니다3.</div>;
+    return <div className="p-6 text-red-600">존재하지 않는 가게입니다.</div>;
   }
 
   return (
@@ -75,6 +87,7 @@ export default async function ShopDetailsPage({ params }) {
 
         {/* 향후: 꽃 리스트 연결 자리 */}
         {/* <ShopFlowerList shopFlowerList={shop.flowers} /> */}
+        <ShopFlowerList shopFlowerList={flowers} />
       </div>
 
       {/* 오른쪽: 주문 요약 + 연락처 */}

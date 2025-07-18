@@ -6,12 +6,12 @@ export default function ShopFlowerList({ shopFlowerList }) {
   return (
     <div className="flex flex-wrap gap-5">
       {shopFlowerList.map((item) => (
-        <div key={item.id}>
+        <div key={item.stockId}>
           <ShopFlowerCard
-            image={item.image}
-            name={item.name}
-            symbolism={item.specifics.symbolism}
-            slug={item.slug}
+            image={item.flower.imageUrl}
+            name={item.flower.name}
+            symbolism={item.flower.flowerLanguage}
+            slug={item.stockId.toString()}
           />
         </div>
       ))}
