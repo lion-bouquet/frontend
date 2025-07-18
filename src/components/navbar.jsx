@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LogInButton from "./login-button";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -46,15 +47,7 @@ export default function Navbar() {
             주문 확인
           </Link>
 
-          <button
-            onClick={() =>
-              (window.location.href =
-                "https://likelion.patulus.com/oauth2/authorization/google")
-            }
-            className="px-4 py-1.5 border rounded-md text-sm font-medium cursor-pointer hover:bg-gray-50"
-          >
-            Sign In
-          </button>
+          <LogInButton />
         </div>
       </div>
     </nav>
