@@ -1,19 +1,26 @@
-import { cookies } from "next/headers";
+"use client";
+
+import { useEffect, useState } from "react";
 import FlowerShopCard from "./flower-shop-card";
 
-export default async function FlowerShopList() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
+export default function FlowerShopList() {
+  const [shops, setShops] = useState([]);
 
-  const res = await fetch("https://likelion.patulus.com/api/v1/shops", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    cache: "no-store",
-  });
-
-  const json = await res.json();
-  const shops = Array.isArray(json) ? json : [];
+  useEffect(() => {
+    fetch("https://likelion.patulus.com/shops", {
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("✅ 데이터:", data);
+        setShops(Array.isArray(data) ? data : []);
+      })
+      .catch((err) => {
+        console.error("❌ 오류:", err);
+      });
+  }, []);
 
   return (
     <div className="flex flex-wrap gap-5">
@@ -24,7 +31,7 @@ export default async function FlowerShopList() {
           image={item.image ?? "/image/dummy-img.png"}
           rating={item.rating}
           reviewCount={item.reviewCount ?? 0}
-          slug={item.id.toString()}
+          slug={item.id}
         />
       ))}
     </div>

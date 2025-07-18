@@ -2,11 +2,20 @@ import Image from "next/image";
 import { recommendedShops } from "@/app/db/flower-shop-data";
 import ShopFlowerList from "@/components/shop-flower-list";
 import OrderSummary from "@/components/order-page/order-summary";
-import BackReloadClient from "@/components/BackReloadClient";
 
 export default async function ShopDetailsPage({ params }) {
   const { slug } = await params;
-  const shop = recommendedShops.find((shop) => shop.slug === slug);
+  // const shop = recommendedShops.find((shop) => shop.slug === slug);
+  const res = await fetch(`https://likelion.patulus.com/shops/${slug}`);
+  const shop = await res.json(); // ✅ 여기까지가 끝!
+
+  console.log(shop); // 잘 나옴
+
+  if (!shop) {
+    return <div className="p-6 text-red-600">존재하지 않는 가게입니다.</div>;
+  }
+
+  console.log(shop);
 
   if (!shop) {
     return <div className="p-6 text-red-600">존재하지 않는 가게입니다.</div>;
@@ -14,14 +23,14 @@ export default async function ShopDetailsPage({ params }) {
 
   return (
     <>
-      <BackReloadClient />
       <div className="max-w-screen-xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* 왼쪽: 꽃집 소개 + 꽃 리스트 (3칸 차지) */}
         <div className="lg:col-span-3 space-y-6">
           {/* 꽃집 대표 이미지 */}
           <div className="border border-[#EBEBEAFF] w-full rounded-xl overflow-hidden">
             <Image
-              src={shop.image}
+              // src={shop.image}
+              src={"/image/dummy-img"}
               alt={shop.name}
               width={800}
               height={400}
@@ -52,7 +61,7 @@ export default async function ShopDetailsPage({ params }) {
           </div>
 
           {/* 꽃 리스트 */}
-          <ShopFlowerList shopFlowerList={shop.flowers} />
+          {/* <ShopFlowerList shopFlowerList={shop.flowers} /> */}
         </div>
 
         {/* 오른쪽: Order Summary + Contact */}
