@@ -29,7 +29,7 @@ export default function HomePage() {
           <div className="pr-[5px]">
             <Link href="/flower-shop">
               <button
-                className="text-sm font-semibold rounded-full px-6 py-2 text-[#333] shadow"
+                className="text-sm font-semibold rounded-full px-6 py-2 text-[#333] shadow cursor-pointer transition duration-200 active:scale-95 hover:opacity-90"
                 style={{
                   minWidth: "200px",
                   background:
@@ -40,6 +40,8 @@ export default function HomePage() {
               </button>
             </Link>
           </div>
+
+
         </div>
       </div>
 

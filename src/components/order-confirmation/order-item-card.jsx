@@ -24,7 +24,7 @@ export default function OrderItemCard({ item }) {
       <p className="text-xs text-gray-400 mt-1 flex-1">{item.description}</p>
       <button
         onClick={handleClick}
-        className="mt-3 px-3 py-1 text-sm font-semibold rounded-full"
+        className="mt-3 px-3 py-1 text-sm font-semibold rounded-full cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
         style={{
           background: "linear-gradient(to right, #E8D6F4, #D3DAF6)",
           color: "#555",
@@ -32,6 +32,7 @@ export default function OrderItemCard({ item }) {
       >
         상품 정보
       </button>
+
     </div>
   );
 }

@@ -10,7 +10,6 @@ export default function TopPicksFlowerList() {
           image={item.image}
           name={item.name}
           description={item.description}
-          price={item.price}
           slug={item.slug}
         />
       ))}

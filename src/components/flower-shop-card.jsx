@@ -47,7 +47,7 @@ export default function FlowerShopCard({
         <div className="flex justify-end mt-1">
           <Link href={`/flower-shop/${slug}`}>
             <button
-              className="text-sm font-semibold rounded-full px-6 py-2 text-[#333] shadow"
+              className="text-sm font-semibold rounded-full px-6 py-2 text-[#333] shadow cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
               style={{
                 background:
                   "linear-gradient(135deg, #BEDEF2 0%, #D1DCF6 30%, #D8CDEE 70%, #F5D5E2 100%)",
@@ -55,6 +55,7 @@ export default function FlowerShopCard({
             >
               상세보기
             </button>
+
           </Link>
         </div>
       </div>

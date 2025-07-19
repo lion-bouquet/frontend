@@ -51,17 +51,17 @@ export default function OrderItemCard({
       </div>
 
       <div className="flex items-center gap-2 ml-auto border border-[#ebebea] rounded-xl px-4 py-2">
-        <button className="mx-2 cursor-pointer" onClick={() => updateCount(-1)}>
+        <button className="mx-2 cursor-pointer transition duration-200 hover:opacity-80 active:scale-95" onClick={() => updateCount(-1)}>
           −
         </button>
         <span>{item.count}</span>
-        <button className="mx-2 cursor-pointer" onClick={() => updateCount(1)}>
+        <button className="mx-2 cursor-pointer transition duration-200 hover:opacity-80 active:scale-95" onClick={() => updateCount(1)}>
           +
         </button>
       </div>
 
       <button
-        className="text-[#8b8c8a] text-sm ml-4 cursor-pointer"
+        className="text-[#8b8c8a] text-sm ml-4 cursor-pointer transition duration-200 hover:opacity-80 active:scale-95"
         onClick={handleDelete}
       >
         <Trash2 size={20} />

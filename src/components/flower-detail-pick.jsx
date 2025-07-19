@@ -37,7 +37,7 @@ export default function FlowerDetailPick({ flower }) {
           <div className="flex justify-end mt-2">
             <button
               onClick={() => router.back()}
-              className="text-sm font-semibold text-[#333] rounded-full px-8 py-2 shadow"
+              className="text-sm font-semibold text-[#333] rounded-full px-8 py-2 shadow cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
               style={{
                 background:
                   "linear-gradient(135deg, #BEDEF2 0%, #D1DCF6 30%, #D8CDEE 70%, #F5D5E2 100%)",
@@ -45,6 +45,7 @@ export default function FlowerDetailPick({ flower }) {
             >
               계속하기
             </button>
+
           </div>
         </div>
       </div>

@@ -5,7 +5,6 @@ import {
   MessageSquareText,
   Star,
   ShoppingCart,
-  MapPin,
 } from "lucide-react";
 import { useState } from "react";
 import clsx from "clsx";
@@ -35,7 +34,7 @@ export default function SortButtons() {
             key={id}
             onClick={() => setSelectedSort(id)}
             className={clsx(
-              "flex items-center gap-1.5 px-4 py-1.5 rounded-full border text-sm transition shadow-sm",
+              "flex items-center gap-1.5 px-4 py-1.5 rounded-full border text-sm transition shadow-sm cursor-pointer hover:opacity-90 active:scale-95",
               selectedSort === id
                 ? "border-violet-400 text-[#333] font-semibold"
                 : "border-transparent text-gray-500 hover:bg-gray-100"
@@ -62,7 +61,7 @@ export default function SortButtons() {
             key={id}
             onClick={() => setSelectedCity(id)}
             className={clsx(
-              "px-4 py-1.5 text-sm rounded-full border transition shadow-sm",
+              "px-4 py-1.5 text-sm rounded-full border transition shadow-sm cursor-pointer hover:opacity-90 active:scale-95",
               selectedCity === id
                 ? "border-violet-400 text-violet-600 font-medium"
                 : "border-gray-200 text-gray-500 hover:bg-gray-100"

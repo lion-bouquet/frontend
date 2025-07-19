@@ -47,27 +47,30 @@ export default function ShopFlowerCard({ image, name, symbolism, slug }) {
 
         <div className="mt-4 flex justify-center items-center gap-4">
           <button
-            className="rounded-full border border-[#EBEBEAFF] px-3 py-1"
+            className="rounded-full border border-[#EBEBEAFF] px-3 py-1 cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
             onClick={() => handleCountChange(-1)}
           >
             −
           </button>
+
           <span className="font-medium">{count}</span>
           <button
-            className="rounded-full border border-[#EBEBEAFF] px-3 py-1"
+            className="rounded-full border border-[#EBEBEAFF] px-3 py-1 cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
             onClick={() => handleCountChange(1)}
           >
             +
           </button>
+
         </div>
 
         <button
           onClick={handleAddToCart}
-          className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r cursor-pointer from-[#D3D6F3] via-[#E8DAF1] to-[#F5D5E2] text-white text-sm py-2 rounded-full shadow-sm hover:opacity-90 transition"
+          className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-[#D3D6F3] via-[#E8DAF1] to-[#F5D5E2] text-white text-sm py-2 rounded-full shadow-sm cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
         >
           <ShoppingCart size={16} />
           Add to Cart
         </button>
+
       </div>
     </div>
   );

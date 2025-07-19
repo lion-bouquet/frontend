@@ -50,7 +50,7 @@ export default function OrderCard({ order }) {
 
           <Link href="/order-confirmation">
             <button
-              className="mt-2 px-4 py-2 text-sm font-bold rounded-full text-[#5b5967] font-medium"
+              className="mt-2 px-4 py-2 text-sm font-bold rounded-full text-[#5b5967] font-medium cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
               style={{
                 background:
                   "linear-gradient(135deg, #BEDEF2 0%, #D1DCF6 30%, #D8CDEE 70%, #F5D5E2 100%)",
@@ -59,6 +59,7 @@ export default function OrderCard({ order }) {
               주문 상세 보기
             </button>
           </Link>
+
         </div>
       </div>
     </div>

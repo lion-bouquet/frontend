@@ -27,15 +27,16 @@ export default function FlowerCard({ image, name, description, slug, price }) {
             </div>
 
             <button
-              className="text-sm font-semibold rounded-full px-6 py-2 text-[#333] shadow whitespace-nowrap"
+              className="text-sm font-semibold rounded-full px-6 py-2 text-[#333] shadow whitespace-nowrap cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
               style={{
                 background:
                   "linear-gradient(135deg, #BEDEF2 0%, #D1DCF6 30%, #D8CDEE 70%, #F5D5E2 100%)",
-                marginTop: "1.7rem"
+                marginTop: "1.7rem",
               }}
             >
               상세보기
             </button>
+
           </div>
         </div>
       </div>

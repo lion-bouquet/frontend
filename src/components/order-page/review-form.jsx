@@ -73,10 +73,11 @@ export default function ReviewForm({ onSubmit }) {
       <div className="flex justify-end">
         <button
           onClick={handleSubmit}
-          className="bg-gradient-to-r from-[#C9E3F5] via-[#E6D4F2] to-[#F7D3DF] px-6 py-2 rounded-full shadow-sm text-sm font-semibold text-gray-700 hover:opacity-90 transition"
+          className="bg-gradient-to-r from-[#C9E3F5] via-[#E6D4F2] to-[#F7D3DF] px-6 py-2 rounded-full shadow-sm text-sm font-semibold text-gray-700 hover:opacity-90 transition cursor-pointer active:scale-95"
         >
           작성하기
         </button>
+
       </div>
 
       {/* 진동 애니메이션 정의 */}
