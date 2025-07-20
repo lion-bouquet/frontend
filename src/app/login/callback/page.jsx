@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useSetAtom } from "jotai";
 import { userAtom } from "@/app/atoms/userAtom";
 import { authAtom } from "@/app/atoms/authAtom";
+import LoadingSpinner from "@/components/loading-spinner";
 
 export default function CallbackPage() {
   const router = useRouter();
@@ -58,5 +59,9 @@ export default function CallbackPage() {
     if (tokenCode) sendToServer();
   }, [tokenCode, router, setUser, setAuth]);
 
-  return <div className="p-10 text-center">로그인 중...</div>;
+  return (
+    <div className="flex justify-center items-center min-h-screen">
+      <LoadingSpinner />
+    </div>
+  );
 }

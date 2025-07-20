@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import OrderCard from "./order-card";
+import LoadingSpinner from "../loading-spinner";
 
 export default function OrderList({ onFetched }) {
   const [orders, setOrders] = useState([]);
@@ -47,7 +48,12 @@ export default function OrderList({ onFetched }) {
     fetchOrders();
   }, [onFetched]);
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading)
+    return (
+      <div>
+        <LoadingSpinner />
+      </div>
+    );
 
   return (
     <div className="mt-20">

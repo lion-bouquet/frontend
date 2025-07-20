@@ -4,17 +4,26 @@ import { Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import ReviewList from "./review-list";
 import ReviewForm from "./review-form";
+import LoadingSpinner from "../loading-spinner";
 
 export default function ReviewSection({ rating, reviewCount, shopId }) {
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchReviews = async () => {
-    const res = await fetch(
-      `https://likelion.patulus.com/shops/${shopId}/reviews`
-    );
-    const json = await res.json();
-    if (json.success === "true") {
-      setReviews(json.data || []);
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `https://likelion.patulus.com/shops/${shopId}/reviews`
+      );
+      const json = await res.json();
+      if (json.success === "true") {
+        setReviews(json.data || []);
+      }
+    } catch (err) {
+      console.error("리뷰 불러오기 실패:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,7 +55,13 @@ export default function ReviewSection({ rating, reviewCount, shopId }) {
           </span>
         </div>
 
-        <ReviewList reviews={reviews} />
+        {loading ? (
+          <div className="flex justify-center py-10">
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <ReviewList reviews={reviews} />
+        )}
       </div>
     </section>
   );
