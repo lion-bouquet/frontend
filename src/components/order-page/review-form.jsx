@@ -4,24 +4,60 @@ import { useState } from "react";
 import { Star } from "lucide-react";
 import clsx from "clsx";
 
-export default function ReviewForm({ onSubmit }) {
+export default function ReviewForm({ shopId, onSubmit }) {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const [shake, setShake] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!rating || !content.trim()) {
       setError("평점과 리뷰를 모두 작성해주세요.");
       setShake(true);
-      setTimeout(() => setShake(false), 500); // 진동 애니메이션 초기화
+      setTimeout(() => setShake(false), 500);
       return;
     }
+
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `https://likelion.patulus.com/shops/${shopId}/reviews`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            stars: rating,
+            content,
+          }),
+        }
+      );
+
+      const json = await res.json();
+
+      if (json.success) {
+        alert("리뷰가 성공적으로 등록되었습니다.");
+        setRating(0);
+        setContent("");
+
+        onSubmit?.(json.data);
+      } else {
+        alert("리뷰 등록 실패: " + (json.message || "알 수 없는 오류"));
+      }
+    } catch (err) {
+      console.error("리뷰 등록 에러:", err);
+      alert("리뷰 등록 중 오류가 발생했습니다.");
+    }
+
     setError("");
-    onSubmit?.({ rating, content });
-    setRating(0);
-    setContent("");
   };
 
   return (
@@ -77,7 +113,6 @@ export default function ReviewForm({ onSubmit }) {
         >
           작성하기
         </button>
-
       </div>
 
       {/* 진동 애니메이션 정의 */}

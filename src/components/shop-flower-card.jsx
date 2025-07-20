@@ -86,7 +86,7 @@ export default function ShopFlowerCard({
       {/* 꽃 이름 + 상세보기 */}
       <div className="flex items-center justify-between">
         <h4 className="font-semibold text-base text-black truncate">{name}</h4>
-        <Link href={`/flower-detail/${name}`}>
+        <Link href={`/flower-detail/${stockId}`}>
           <span className="text-xs text-gray-400 cursor-pointer hover:text-gray-600 transition">
             상세 정보 보기 &gt;
           </span>
@@ -121,7 +121,7 @@ export default function ShopFlowerCard({
         {/* 장바구니 버튼 */}
         <button
           onClick={handleAddToCart}
-          className="px-4 py-1 text-sm rounded-full bg-gradient-to-r from-[#D3D6F3] via-[#E8DAF1] to-[#F5D5E2] text-white shadow-sm hover:opacity-90 transition"
+          className="px-4 py-1 cursor-pointer text-sm rounded-full bg-gradient-to-r from-[#D3D6F3] via-[#E8DAF1] to-[#F5D5E2] text-white shadow-sm hover:opacity-90 transition"
         >
           Add to Cart
         </button>
