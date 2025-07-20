@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export default function OrderCard({ order }) {
+  console.log(order.pickupTime);
   return (
     <div className="p-4 rounded-xl border border-[#EBEBEAFF] bg-white mb-20 relative">
       {/* 주문 시간 */}
@@ -43,9 +44,7 @@ export default function OrderCard({ order }) {
 
         {/* 픽업 시간 + 버튼 */}
         <div className="flex flex-col items-end justify-between text-sm text-[#5b5967] ml-auto min-w-[150px]">
-          <div>
-            <span className="font-semibold">픽업 시간</span> {order.pickupTime}
-          </div>
+          <span className="font-semibold">픽업 시간: {order.pickupTime}</span>
 
           <Link href={`/order-confirmation?orderCode=${order.orderCode}`}>
             <button

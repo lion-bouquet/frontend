@@ -24,7 +24,7 @@ export default function OrderList({ onFetched }) {
           const formatted = data.data.map((order) => ({
             orderCode: order.orderCode,
             orderTime: new Date(order.orderDate).toLocaleString(),
-            pickupTime: new Date(order.pickupAvailableTime).toLocaleString(),
+            pickupTime: new Date(order.pickUpAvailableTime).toLocaleString(),
             shopName: order.shop.shopName,
             image: order.shop.shopImage ?? "/image/dummy-flower.jpg",
             items: order.stocks.map((s) => ({
