@@ -1,31 +1,23 @@
-import { NextResponse } from "next/server";
+import { flowerDetail } from "@/app/db/flower-detail-data";
 
-export async function POST(req) {
-  const { tokenCode } = await req.json();
+import FlowerDetailPick from "@/components/flower-detail-pick";
 
-  const response = await fetch(
-    "https://likelion.patulus.com/api/v1/users/token",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tokenCode }),
-    }
-  );
+export default async function FlowerDetailPage({ params }) {
+  const { slug } = await params;
+  const flower = flowerDetail.find((f) => f.id === slug);
 
-  if (!response.ok) {
-    return NextResponse.json({ success: false }, { status: 401 });
+  if (!flower) {
+    return (
+      <div className="p-10 text-center text-red-500 text-xl">
+        Flower not found 😢
+      </div>
+    );
   }
 
-  const result = await response.json();
-  const { accessToken, refreshToken } = result.data;
-
-  return NextResponse.json({
-    success: true,
-    data: {
-      accessToken,
-      refreshToken,
-    },
-  });
+  return (
+    <div className="p-8">
+      {/* 상단 꽃 정보 */}
+      <FlowerDetailPick flower={flower} />
+    </div>
+  );
 }

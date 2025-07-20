@@ -20,7 +20,7 @@ export default function FlowerDetailCareGuide({ careGuide }) {
             <div key={idx} className="py-4">
               <button
                 onClick={() => toggle(idx)}
-                className="w-full flex items-center justify-between text-left"
+                className="w-full flex items-center justify-between text-left cursor-pointer transition duration-200 hover:opacity-90 active:scale-[0.98]"
               >
                 {/* 아이콘 + 타이틀 영역 */}
                 <div className="flex items-center gap-2 text-black font-medium">
@@ -33,6 +33,7 @@ export default function FlowerDetailCareGuide({ careGuide }) {
                   {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                 </span>
               </button>
+
 
               {/* 내용 */}
               <div

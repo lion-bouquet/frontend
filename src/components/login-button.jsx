@@ -5,6 +5,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { userAtom } from "@/app/atoms/userAtom";
 import { authAtom } from "@/app/atoms/authAtom";
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginButton() {
   const user = useAtomValue(userAtom);
@@ -12,6 +13,7 @@ export default function LoginButton() {
   const setAuth = useSetAtom(authAtom);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const wrapperRef = useRef(null);
+  const router = useRouter();
 
   const handleLogout = async () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -34,6 +36,7 @@ export default function LoginButton() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setIsMenuOpen(false);
+    router.replace("/home");
   };
 
   // 바깥 클릭 시 메뉴 닫기
@@ -70,10 +73,11 @@ export default function LoginButton() {
         {isMenuOpen && (
           <button
             onClick={handleLogout}
-            className="absolute right-0 mt-2 px-3 py-1 border rounded bg-white shadow text-sm hover:bg-gray-100 z-10"
+            className="absolute right-0 mt-2 px-3 py-1 border rounded bg-white shadow text-sm hover:bg-gray-100 z-10 cursor-pointer transition duration-200 active:scale-95"
           >
             로그아웃
           </button>
+
         )}
       </div>
     );
@@ -82,9 +86,10 @@ export default function LoginButton() {
   return (
     <a
       href="https://likelion.patulus.com/oauth2/authorization/google"
-      className="px-4 py-1.5 border rounded-md text-sm font-medium hover:bg-gray-50"
+      className="px-4 py-1.5 border rounded-md text-sm font-medium hover:bg-gray-50 cursor-pointer transition"
     >
       로그인
     </a>
+
   );
 }

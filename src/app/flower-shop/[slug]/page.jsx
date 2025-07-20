@@ -1,89 +1,124 @@
 import Image from "next/image";
-import { recommendedShops } from "@/app/db/flower-shop-data";
-import ShopFlowerList from "@/components/shop-flower-list";
 import OrderSummary from "@/components/order-page/order-summary";
+import ShopFlowerList from "@/components/shop-flower-list";
+import ReviewSection from "@/components/order-page/review-section";
+import ShopIntroduction from "@/components/order-page/shop-introduction";
+import FlowerSelectionWrapper from "@/components/order-page/flower-selection-wrapper";
 
 export default async function ShopDetailsPage({ params }) {
   const { slug } = await params;
-  // const shop = recommendedShops.find((shop) => shop.slug === slug);
-  const res = await fetch(`https://likelion.patulus.com/shops/${slug}`);
-  const shop = await res.json(); // ✅ 여기까지가 끝!
 
-  console.log(shop); // 잘 나옴
+  let shop = null;
+  let flowers = [];
 
-  if (!shop) {
+  try {
+    const [shopRes, flowerRes] = await Promise.all([
+      fetch(`https://likelion.patulus.com/shops/${slug}`, {
+        cache: "no-store",
+      }),
+      fetch(`https://likelion.patulus.com/shops/${slug}/stocks`, {
+        cache: "no-store",
+      }),
+    ]);
+
+    if (!shopRes.ok)
+      throw new Error("❌ 가게 정보를 불러오는 데 실패했습니다.");
+    const shopJson = await shopRes.json();
+    shop = shopJson;
+    if (!shop || !shop.id)
+      throw new Error("❌ 유효하지 않은 가게 데이터입니다.");
+
+    if (flowerRes.ok) {
+      const flowerJson = await flowerRes.json();
+      flowers = flowerJson?.data || [];
+    } else {
+      console.warn("⚠️ 꽃 리스트 불러오기 실패");
+    }
+  } catch (error) {
+    console.error("에러:", error);
     return <div className="p-6 text-red-600">존재하지 않는 가게입니다.</div>;
   }
-
-  console.log(shop);
 
   if (!shop) {
     return <div className="p-6 text-red-600">존재하지 않는 가게입니다.</div>;
   }
 
   return (
-    <>
-      <div className="max-w-screen-xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* 왼쪽: 꽃집 소개 + 꽃 리스트 (3칸 차지) */}
-        <div className="lg:col-span-3 space-y-6">
-          {/* 꽃집 대표 이미지 */}
-          <div className="border border-[#EBEBEAFF] w-full rounded-xl overflow-hidden">
-            <Image
-              // src={shop.image}
-              src={"/image/dummy-img"}
-              alt={shop.name}
-              width={800}
-              height={400}
-              className="w-full h-64 object-cover"
-              priority
-            />
-          </div>
-
-          {/* About Our Shop */}
-          <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">
-            <h2 className="text-xl font-semibold mb-2">About Our Shop</h2>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              {shop.description || "꽃집 소개 내용이 아직 등록되지 않았습니다."}
-            </p>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-              {[...Array(4)].map((_, i) => (
-                <Image
-                  key={i}
-                  src="/image/dummy-img.png"
-                  alt="shop"
-                  width={300}
-                  height={200}
-                  className="rounded-lg object-cover h-32 w-full"
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* 꽃 리스트 */}
-          {/* <ShopFlowerList shopFlowerList={shop.flowers} /> */}
+    <div className="max-w-screen-xl mx-auto p-6 flex flex-col gap-6">
+      {/* 상단: 대표 이미지 + OrderSummary */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* 대표 이미지 (왼쪽 3칸) */}
+        <div className="lg:col-span-3 border border-[#EBEBEAFF] rounded-xl overflow-hidden">
+          <Image
+            src={shop.shopImage || "/image/dummy-img.png"}
+            alt={shop.shopName}
+            width={800}
+            height={400}
+            className="w-full h-64 object-cover"
+            priority
+            sizes="(max-width: 1024px) 100vw, 75vw"
+          />
         </div>
 
-        {/* 오른쪽: Order Summary + Contact */}
-        <div className="space-y-6 lg:col-span-1">
+        {/* 오더서머리 (오른쪽 1칸) */}
+        <div className="lg:col-span-1">
           <OrderSummary mode="compact" />
+        </div>
+      </div>
 
-          {/* Contact & Hours */}
+      {/* 소개 + 연락처 */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* 소개 (왼쪽 3칸) */}
+        <div className="lg:col-span-3">
+          <ShopIntroduction shop={shop} />
+        </div>
+
+        {/* 연락처 (오른쪽 1칸) */}
+        <div className="lg:col-span-1 space-y-6 text-[#5b5967]">
           <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Contact & Hours</h3>
+            <h3 className="text-lg font-bold mb-2">문의:</h3>
             <div className="text-sm text-gray-700 space-y-1">
-              <p>📞 +1 (555) 123-4567</p>
-              <p>📧 info@{shop.slug}.com</p>
-              <div className="mt-3">
-                <p className="font-medium mb-1">Opening Hours:</p>
-                <p>Mon–Fri: 9:00 AM – 6:00 PM</p>
-                <p>Sat: 10:00 AM – 4:00 PM</p>
-                <p>Sun: Closed</p>
-              </div>
+              <p>📞 {shop.phoneNumber || "전화번호 정보 없음"}</p>
+              <p>📧 info@{slug}.com</p>
+              {Array.isArray(shop.businessHours) && (
+                <div className="mt-3">
+                  <p className="font-bold mb-1 text-lg text-[#5b5967]">
+                    영업 시간:
+                  </p>
+                  {shop.businessHours.map((hour, i) => (
+                    <p key={i}>
+                      {hour.dayOfWeek}: {hour.openTime} – {hour.closeTime}
+                    </p>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
-    </>
+
+      {/* 전체 가로 리뷰 */}
+      <div className="w-full">
+        <h3 className="text-xl font-extrabold text-[#403e3e]">평점 & 리뷰:</h3>
+        <ReviewSection
+          rating={shop.rating}
+          reviewCount={shop.reviewCount}
+          shopId={shop.id}
+        />
+      </div>
+
+      {/* 전체 가로 꽃 리스트 */}
+      <div className="w-full">
+        <h3 className="text-xl font-extrabold text-[#403e3e]">
+          꽃을 선택하세요
+        </h3>
+        <ShopFlowerList shopFlowerList={flowers} />
+      </div>
+
+      {/* 전체 가로 flower selection */}
+      <div className="w-full">
+        <FlowerSelectionWrapper slug={slug} />
+      </div>
+    </div>
   );
 }
