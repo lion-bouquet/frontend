@@ -1,13 +1,23 @@
-// app/page.jsx 또는 HomePage 컴포넌트
+// app/page.jsx
 
-import FlowerList from "@/components/top-picks-flower-list";
 import FlowerShopList from "@/components/flower-shop-list";
+import TopPicksFlowerList from "@/components/top-picks-flower-list";
 import HomeImg from "@/components/home-img";
 import WhySection from "@/components/why-section";
-import TopPicksFlowerList from "@/components/top-picks-flower-list";
 import Link from "next/link";
 
-export default function HomePage() {
+// 🚩 서버컴포넌트 (SSR)
+export default async function HomePage() {
+  // 꽃집 리스트를 SSR에서 fetch!
+  const res = await fetch("https://likelion.patulus.com/shops", { cache: "no-store" });
+  const json = await res.json();
+  const shops =
+    Array.isArray(json)
+      ? json
+      : json.success === "true" && Array.isArray(json.data)
+        ? json.data
+        : [];
+
   return (
     <>
       <div className="relative">
@@ -40,8 +50,6 @@ export default function HomePage() {
               </button>
             </Link>
           </div>
-
-
         </div>
       </div>
 
@@ -50,7 +58,8 @@ export default function HomePage() {
       <label className="block text-black text-3xl font-bold mt-8 mb-4">
         오늘의 추천 꽃집
       </label>
-      <FlowerShopList layout="scroll" />
+      {/* ✅ fetch한 shops를 props로 반드시 전달! */}
+      <FlowerShopList layout="scroll" shops={shops} />
 
       <label className="block text-black text-3xl font-bold mt-8 mb-4">
         당신만을 위한 꽃 추천

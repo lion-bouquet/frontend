@@ -52,7 +52,7 @@ export default async function TopPicksFlowerList() {
           image={item.imageUrl}
           name={item.name}
           description={item.floriography}
-          slug={item.id?.toString()}
+          id={item.id?.toString()}
         />
       ))}
     </div>
