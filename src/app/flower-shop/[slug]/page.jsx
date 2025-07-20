@@ -1,10 +1,9 @@
 import Image from "next/image";
 import OrderSummary from "@/components/order-page/order-summary";
 import ShopFlowerList from "@/components/shop-flower-list";
-import ReviewCard from "@/components/order-page/review-list";
-import ReviewList from "@/components/order-page/review-list";
 import ReviewSection from "@/components/order-page/review-section";
 import ShopIntroduction from "@/components/order-page/shop-introduction";
+import FlowerSelectionWrapper from "@/components/order-page/flower-selection-wrapper";
 
 export default async function ShopDetailsPage({ params }) {
   const { slug } = await params;
@@ -13,7 +12,6 @@ export default async function ShopDetailsPage({ params }) {
   let flowers = [];
 
   try {
-    // 1. 가게 정보 & 꽃 리스트 동시 요청
     const [shopRes, flowerRes] = await Promise.all([
       fetch(`https://likelion.patulus.com/shops/${slug}`, {
         cache: "no-store",
@@ -23,7 +21,6 @@ export default async function ShopDetailsPage({ params }) {
       }),
     ]);
 
-    // 2. 가게 정보 처리
     if (!shopRes.ok)
       throw new Error("❌ 가게 정보를 불러오는 데 실패했습니다.");
     const shopJson = await shopRes.json();
@@ -31,7 +28,6 @@ export default async function ShopDetailsPage({ params }) {
     if (!shop || !shop.id)
       throw new Error("❌ 유효하지 않은 가게 데이터입니다.");
 
-    // 3. 꽃 리스트 처리
     if (flowerRes.ok) {
       const flowerJson = await flowerRes.json();
       flowers = flowerJson?.data || [];
@@ -48,14 +44,13 @@ export default async function ShopDetailsPage({ params }) {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
-      {/* 왼쪽: 꽃집 소개 + 꽃 리스트 */}
-      <div className="lg:col-span-3 space-y-6">
-        {/* 대표 이미지 */}
-        <div className="border border-[#EBEBEAFF] w-full rounded-xl overflow-hidden">
+    <div className="max-w-screen-xl mx-auto p-6 flex flex-col gap-6">
+      {/* 상단: 대표 이미지 + OrderSummary */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* 대표 이미지 (왼쪽 3칸) */}
+        <div className="lg:col-span-3 border border-[#EBEBEAFF] rounded-xl overflow-hidden">
           <Image
-            // src={shop.shopImage || "/image/dummy-img.png"}
-            src="/image/dummy-img.png"
+            src={shop.shopImage || "/image/dummy-img.png"}
             alt={shop.shopName}
             width={800}
             height={400}
@@ -65,46 +60,64 @@ export default async function ShopDetailsPage({ params }) {
           />
         </div>
 
-        {/* About Our Shop */}
-        <ShopIntroduction shop={shop} />
+        {/* 오더서머리 (오른쪽 1칸) */}
+        <div className="lg:col-span-1">
+          <OrderSummary mode="compact" />
+        </div>
+      </div>
 
-        {/* 리뷰 */}
+      {/* 소개 + 연락처 */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* 소개 (왼쪽 3칸) */}
+        <div className="lg:col-span-3">
+          <ShopIntroduction shop={shop} />
+        </div>
+
+        {/* 연락처 (오른쪽 1칸) */}
+        <div className="lg:col-span-1 space-y-6 text-[#5b5967]">
+          <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">
+            <h3 className="text-lg font-bold mb-2">문의:</h3>
+            <div className="text-sm text-gray-700 space-y-1">
+              <p>📞 {shop.phoneNumber || "전화번호 정보 없음"}</p>
+              <p>📧 info@{slug}.com</p>
+              {Array.isArray(shop.businessHours) && (
+                <div className="mt-3">
+                  <p className="font-bold mb-1 text-lg text-[#5b5967]">
+                    영업 시간:
+                  </p>
+                  {shop.businessHours.map((hour, i) => (
+                    <p key={i}>
+                      {hour.dayOfWeek}: {hour.openTime} – {hour.closeTime}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 전체 가로 리뷰 */}
+      <div className="w-full">
         <h3 className="text-xl font-extrabold text-[#403e3e]">평점 & 리뷰:</h3>
         <ReviewSection
           rating={shop.rating}
           reviewCount={shop.reviewCount}
           shopId={shop.id}
         />
+      </div>
 
-        {/* 꽃집 판매 꽃 목록 */}
+      {/* 전체 가로 꽃 리스트 */}
+      <div className="w-full">
         <h3 className="text-xl font-extrabold text-[#403e3e]">
           꽃을 선택하세요
         </h3>
         <ShopFlowerList shopFlowerList={flowers} />
       </div>
 
-      {/* 오른쪽: 주문 요약 + 연락처 */}
-      <div className="space-y-6 lg:col-span-1">
-        <OrderSummary mode="compact" />
-
-        <div className="bg-white border border-[#EBEBEAFF] rounded-xl p-6">
-          <h3 className="text-lg font-semibold mb-4">Contact & Hours</h3>
-          <div className="text-sm text-gray-700 space-y-1">
-            <p>📞 {shop.phoneNumber || "전화번호 정보 없음"}</p>
-            <p>📧 info@{slug}.com</p>
-
-            {Array.isArray(shop.businessHours) && (
-              <div className="mt-3">
-                <p className="font-medium mb-1">Opening Hours:</p>
-                {shop.businessHours.map((hour, i) => (
-                  <p key={i}>
-                    {hour.dayOfWeek}: {hour.openTime} – {hour.closeTime}
-                  </p>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+      {/* 전체 가로 flower selection */}
+      <div className="w-full">
+        <FlowerSelectionWrapper slug={slug} />
       </div>
     </div>
   );
