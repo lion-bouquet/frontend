@@ -6,7 +6,6 @@ import {
   Star,
   ShoppingCart,
 } from "lucide-react";
-import { useState } from "react";
 import clsx from "clsx";
 
 const sortButtons = [
@@ -21,18 +20,20 @@ const cityButtons = [
   { id: "si", label: "시" },
 ];
 
-export default function SortButtons() {
-  const [selectedSort, setSelectedSort] = useState("all");
-  const [selectedCity, setSelectedCity] = useState("");
-
+export default function SortButtons({
+  selectedSort,
+  selectedCity,
+  onChangeSort,
+  onChangeCity,
+}) {
   return (
     <div className="flex justify-between items-center flex-wrap gap-4">
-      {/* 왼쪽 정렬: 정렬 버튼들 */}
+      {/* 왼쪽: 정렬 버튼 */}
       <div className="flex gap-2 flex-wrap">
         {sortButtons.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
-            onClick={() => setSelectedSort(id)}
+            onClick={() => onChangeSort(id)}
             className={clsx(
               "flex items-center gap-1.5 px-4 py-1.5 rounded-full border text-sm transition shadow-sm cursor-pointer hover:opacity-90 active:scale-95",
               selectedSort === id
@@ -53,13 +54,12 @@ export default function SortButtons() {
           </button>
         ))}
       </div>
-
-      {/* 오른쪽 정렬: 도 / 시 버튼 */}
+      {/* 오른쪽: 도/시 버튼 */}
       <div className="flex gap-2">
         {cityButtons.map(({ id, label }) => (
           <button
             key={id}
-            onClick={() => setSelectedCity(id)}
+            onClick={() => onChangeCity(id)}
             className={clsx(
               "px-4 py-1.5 text-sm rounded-full border transition shadow-sm cursor-pointer hover:opacity-90 active:scale-95",
               selectedCity === id
