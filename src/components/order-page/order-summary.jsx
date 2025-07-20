@@ -40,44 +40,13 @@ export default function OrderSummary({
 
   if (mode === "detailed") {
     return (
-<<<<<<< HEAD
-      <>
-        <div className="bg-white border border-[#ebebea] rounded-xl p-6 space-y-4">
-          <h3 className="text-xl font-bold">Order Summary</h3>
 
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600">Subtotal</span>
-              <span className="font-medium">${totalCartPrice.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600">Discount</span>
-              <span className="text-red-500">-${discount.toFixed(2)}</span>
-            </div>
-          </div>
-
-          <div className="border-t pt-4 flex justify-between items-center">
-            <span className="font-bold text-lg">Total</span>
-            <span className="text-pink-500 text-2xl font-bold">
-              ${totalCartPrice.toFixed(2)}
-            </span>
-          </div>
-
-          <button
-            onClick={onReserve}
-            className="w-full mt-4 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200 cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
-          >
-            예약하기
-          </button>
-
-=======
       <div className="bg-white rounded-xl p-6 space-y-4">
         <div className="border-t pt-4 flex justify-between items-center">
           <span className="font-bold text-lg">총 결제 금액: </span>
           <span className="text-[#7a75e3] text-2xl font-bold">
             {totalCartPrice.toLocaleString()}원
           </span>
->>>>>>> dev
         </div>
 
         {/* <button
@@ -108,23 +77,12 @@ export default function OrderSummary({
         </div>
       </div>
 
-<<<<<<< HEAD
       <Link href={`/order/${slug}`}>
         <button
           className="w-full mt-4 bg-gradient-to-r from-violet-500 to-pink-400 text-white py-2 rounded-full cursor-pointer transition duration-200 hover:opacity-90 active:scale-95"
         >
           View Order Details
-=======
-      <Link href={`/order/${shop}`}>
-        <button
-          className="w-full mt-4 text-white py-2 rounded-full cursor-pointer"
-          style={{
-            background:
-              "linear-gradient(135deg, #BEDEF2 0%, #D1DCF6 30%, #D8CDEE 70%, #F5D5E2 100%)",
-          }}
-        >
-          주문 계속하기
->>>>>>> dev
+
         </button>
       </Link>
 
