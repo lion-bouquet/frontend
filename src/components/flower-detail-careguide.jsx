@@ -1,41 +1,40 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-export default function FlowerDetailCareGuide({ careGuide }) {
+export default function FlowerDetailCareGuide({ careInfo }) {
   const [openIndex, setOpenIndex] = useState(null);
   const contentRefs = useRef([]);
+
+  // 객체 → 배열로 변환
+  const careList = Object.entries(careInfo || {});
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  if (!careList.length) return null;
+
   return (
     <div className="mt-12">
       <h2 className="text-2xl font-bold mb-4">Care Guide</h2>
       <div className="divide-y divide-gray-200">
-        {careGuide.map((item, idx) => {
+        {careList.map(([key, value], idx) => {
           const isOpen = openIndex === idx;
           return (
-            <div key={idx} className="py-4">
+            <div key={key} className="py-4">
               <button
                 onClick={() => toggle(idx)}
                 className="w-full flex items-center justify-between text-left cursor-pointer transition duration-200 hover:opacity-90 active:scale-[0.98]"
               >
-                {/* 아이콘 + 타이틀 영역 */}
+                {/* key를 그대로 표시 */}
                 <div className="flex items-center gap-2 text-black font-medium">
-                  <span className="text-lg leading-none">{item.icon}</span>
-                  <span>{item.title}</span>
+                  <span>{key}</span>
                 </div>
-
-                {/* 토글 아이콘 */}
                 <span className="text-gray-400">
                   {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                 </span>
               </button>
-
-
-              {/* 내용 */}
               <div
                 ref={(el) => (contentRefs.current[idx] = el)}
                 style={{
@@ -47,7 +46,7 @@ export default function FlowerDetailCareGuide({ careGuide }) {
                 }}
                 className="mt-2"
               >
-                <p className="text-sm text-gray-600">{item.content}</p>
+                <p className="text-sm text-gray-600">{value ?? "-"}</p>
               </div>
             </div>
           );

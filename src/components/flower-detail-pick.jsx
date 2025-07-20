@@ -1,4 +1,4 @@
-"use client"; // 꼭 추가해야 함!
+"use client";
 
 import { useRouter } from "next/navigation";
 import FlowerDetailPicture from "@/components/flower-detail-picture";
@@ -13,7 +13,7 @@ export default function FlowerDetailPick({ flower }) {
     <div className="-mt-10">
       {/* 상단 이미지 영역 */}
       <FlowerDetailPicture
-        image={flower.image}
+        image={flower.imageUrl} // <-- 여기!!
         name={flower.name}
         scientificName={flower.scientificName}
       />
@@ -28,9 +28,11 @@ export default function FlowerDetailPick({ flower }) {
 
         {/* 오른쪽: 상세 정보 + 관리 가이드 + 버튼 */}
         <div className="flex flex-col gap-4">
-          <FlowerDetailSpecifics specifics={flower.specifics} />
-          {flower.careGuide && (
-            <FlowerDetailCareGuide careGuide={flower.careGuide} />
+          {/* specifics prop이 아니라 flower에서 바로 뽑거나, 구조에 맞춰서 수정 필요 */}
+          <FlowerDetailSpecifics flower={flower} />
+          {/* careGuide가 아니라 careInfo로 변경 */}
+          {flower.careInfo && (
+            <FlowerDetailCareGuide careInfo={flower.careInfo} />
           )}
 
           {/* 버튼: 우측 하단 정렬 */}
@@ -45,7 +47,6 @@ export default function FlowerDetailPick({ flower }) {
             >
               계속하기
             </button>
-
           </div>
         </div>
       </div>
