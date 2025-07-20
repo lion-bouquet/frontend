@@ -1,6 +1,7 @@
 "use client";
 
-import { MapPin, Clock, Phone, MessageCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { MapPin, Clock, MessageCircle } from "lucide-react";
 import PickupProgress from "@/components/order-confirmation/pickup-progress";
 
 export default function OrderPickTime({ pickupTime, order }) {
@@ -48,6 +49,27 @@ export default function OrderPickTime({ pickupTime, order }) {
     },
   ];
 
+  // ✅ 남은 시간 계산 (초기값)
+  const calculateRemainingMinutes = () => {
+    const now = new Date();
+    const diffMs = date.getTime() - now.getTime();
+    return isValid ? Math.floor(diffMs / 60000) : null;
+  };
+
+  const [remainingMinutes, setRemainingMinutes] = useState(
+    calculateRemainingMinutes
+  );
+
+  useEffect(() => {
+    if (!isValid) return;
+
+    const interval = setInterval(() => {
+      setRemainingMinutes(calculateRemainingMinutes());
+    }, 60 * 1000); // 1분마다
+
+    return () => clearInterval(interval); // cleanup
+  }, [pickupTime]);
+
   return (
     <div
       className="rounded-xl border bg-white p-6 overflow-hidden"
@@ -90,13 +112,25 @@ export default function OrderPickTime({ pickupTime, order }) {
         </p>
 
         <div className="relative w-full mx-auto px-4">
-          <PickupProgress />
+          <PickupProgress
+            remainingMinutes={remainingMinutes}
+            totalMinutes={60} // 원하는 기준 시간 (예: 60분)
+          />
         </div>
 
         <div className="mt-25">
           <p className="text-xl font-bold text-[#403E3E]">
-            픽업까지 예상 시간은 <span className="text-[#7A75E3]">60분</span>{" "}
-            남았습니다!
+            {remainingMinutes === null ? (
+              "예상 시간을 계산할 수 없습니다."
+            ) : remainingMinutes <= 0 ? (
+              <span className="text-[#7A75E3]">픽업이 가능합니다!</span>
+            ) : (
+              <>
+                픽업까지 예상 시간은{" "}
+                <span className="text-[#7A75E3]">{remainingMinutes}분</span>{" "}
+                남았습니다!
+              </>
+            )}
           </p>
           <p className="text-sm font-bold text-[#5b5967] mt-1">
             지정된 시간에 매장 방문 후, 주문번호를 플로리스트에게 말씀해주세요!
