@@ -9,7 +9,6 @@ export default function ShopIntroduction({ shop }) {
           {shop.introduction || "꽃집 소개 내용이 아직 등록되지 않았습니다."}
         </p>
 
-        {/* 
         {shop.images?.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
             {shop.images.map((img, i) => (
@@ -24,26 +23,7 @@ export default function ShopIntroduction({ shop }) {
               />
             ))}
           </div>
-        )} 
-        */}
-
-        {/* 더미 이미지 3개 */}
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-center mt-4">
-          {[1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className="overflow-hidden rounded-xl flex-shrink-0 w-full md:w-[200px] h-[130px]"
-            >
-              <Image
-                src={`/image/dummy-img${i}.png`}
-                alt={`dummy-shop-img-${i}`}
-                width={300}
-                height={200}
-                className="object-cover w-full h-full"
-              />
-            </div>
-          ))}
-        </div>
+        )}
       </div>
     </section>
   );

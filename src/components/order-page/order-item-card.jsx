@@ -10,8 +10,6 @@ export default function OrderItemCard({
   setLocalItems,
   setLocalTotal,
 }) {
-  const dummyPrice = 77;
-
   const updateCount = (delta) => {
     const updated = [...localItems];
     const newCount = updated[index].count + delta;
@@ -23,7 +21,10 @@ export default function OrderItemCard({
   };
 
   const updateTotal = (items) => {
-    const total = items.reduce((sum, item) => sum + item.count * dummyPrice, 0);
+    const total = items.reduce(
+      (sum, item) => sum + item.count * (item.price || 0),
+      0
+    );
     setLocalTotal(total);
   };
 
@@ -46,7 +47,7 @@ export default function OrderItemCard({
       <div className="flex flex-col">
         <h4 className="font-semibold">{item.name}</h4>
         <p className="text-sm text-gray-600">
-          Pirce: ${(item.count * dummyPrice).toFixed(2)}
+          가격: {(item.count * item.price).toLocaleString()}원
         </p>
       </div>
 

@@ -16,14 +16,10 @@ export default function CustomerInformation({
 }) {
   return (
     <div className="p-6 space-y-6 border border-[#ebebea] rounded-lg">
-      <h2 className="text-2xl font-bold">Customer Information</h2>
-
       <form className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-semibold mb-1">
-              Full Name
-            </label>
+            <label className="block text-sm font-semibold mb-1">이름</label>
             <input
               type="text"
               placeholder="홍길동"
@@ -44,7 +40,7 @@ export default function CustomerInformation({
 
           <div>
             <label className="block text-sm font-semibold mb-1">
-              Phone Number
+              휴대폰 번호
             </label>
             <input
               type="tel"
@@ -68,11 +64,6 @@ export default function CustomerInformation({
 
         <div className="space-y-2">
           <label className="flex items-center gap-2">
-            <input type="checkbox" className="w-4 h-4 border-gray-400" />
-            <span>Save as default information</span>
-          </label>
-
-          <label className="flex items-center gap-2">
             <input
               type="checkbox"
               className="w-4 h-4 border-gray-400"
@@ -83,7 +74,7 @@ export default function CustomerInformation({
           </label>
         </div>
 
-        <div className="flex items-center gap-2 p-4 rounded-lg bg-gray-100 text-sm text-gray-700">
+        <div className="flex items-center gap-2 p-4 rounded-lg bg-[#e9ebf9] text-sm text-gray-700">
           <Info className="w-5 h-5 text-gray-500" />
           <span>정보 동의 관련 문구</span>
         </div>
