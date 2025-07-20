@@ -18,7 +18,7 @@ export default function OrderPage() {
   const pathname = usePathname();
   const segments = pathname.split("/");
   const slug = segments[segments.length - 1];
-  const router = useRouter(); // ✅ 리다이렉트용
+  const router = useRouter();
 
   const [cartItems, setCartItems] = useAtom(cartItemsAtom);
   const [cartTotal, setCartTotal] = useAtom(cartTotalAtom);
@@ -30,7 +30,7 @@ export default function OrderPage() {
 
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
-  const [requestNote, setRequestNote] = useState(""); // ✅ 요청사항 입력값
+  const [requestNote, setRequestNote] = useState("");
 
   const [nameErrorMsg, setNameErrorMsg] = useState("");
   const [phoneErrorMsg, setPhoneErrorMsg] = useState("");
@@ -55,7 +55,8 @@ export default function OrderPage() {
     setLocalCartItemCount(totalCount);
   }, [localItems]);
 
-  function handleReserve() {
+  async function handleReserve() {
+    const token = localStorage.getItem("accessToken");
     const phoneRegex = /^010\d{8}$/;
     let hasError = false;
 
@@ -98,20 +99,51 @@ export default function OrderPage() {
     }
 
     const payload = {
-      shop: slug,
-      name: customerName,
-      phone: customerPhone,
-      requestNote,
-      total: localTotal,
+      shopId: Number(slug),
       items: localItems.map((item) => ({
-        name: item.name,
-        count: item.count,
+        stockId: Number(item.stockId),
+        quantity: item.count,
       })),
+      phone: customerPhone,
+      request: requestNote,
     };
 
-    console.log("예약 정보 전송:", payload);
+    console.log("📦 최종 보낼 payload:", payload);
+    console.log("🪪 Authorization token", token);
+    console.log("📦 예약 최종 payload 전송 데이터:");
+    console.log("  shopId:", slug, typeof slug);
+    console.log("  phone:", customerPhone, typeof customerPhone);
+    console.log("  request:", requestNote, typeof requestNote);
+    console.log("  items 배열 전체:", localItems);
 
-    router.push("/order-confirmation");
+    localItems.forEach((item, idx) => {
+      console.log("    stockId:", item.stockId, typeof item.stockId);
+      console.log("    quantity:", item.count, typeof item.count);
+    });
+
+    try {
+      const response = await fetch("https://likelion.patulus.com/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // ✅ 포함
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.warn("❌ 주문 요청 실패:", data);
+        throw new Error(data.message || "주문 요청 실패");
+      }
+
+      console.log("✅ 주문 성공:", data);
+      router.push("/order-list");
+    } catch (error) {
+      console.error("🚨 주문 실패:", error);
+      alert("주문에 실패했습니다. 다시 시도해주세요.");
+    }
   }
 
   return (

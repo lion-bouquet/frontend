@@ -1,25 +1,49 @@
+"use client";
+
+import { MapPin, Clock, Phone, MessageCircle } from "lucide-react";
 import PickupProgress from "@/components/order-confirmation/pickup-progress";
 
-export default function OrderPickTime() {
+export default function OrderPickTime({ pickupTime, order }) {
+  const date = new Date(pickupTime || "");
+  const isValid = !isNaN(date.getTime());
+
+  const formattedDate = isValid
+    ? date.toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        weekday: "short",
+      })
+    : "-";
+
+  const formattedTime = isValid
+    ? date.toLocaleTimeString("ko-KR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+    : "";
+
+  const iconColor = "#7A75E3";
+
   const items = [
-    { label: "픽업 장소", icon: "📍", value: "Petal & Path", bold: true },
     {
-      label: "픽업 예정 시간",
-      icon: "⏰",
-      value: "2025-07-18 (금)",
-      sub: "15:08:54",
+      label: "픽업 장소",
+      icon: <MapPin size={18} color={iconColor} className="mr-2" />,
+      value: order?.shop?.shopName ?? "-",
       bold: true,
     },
     {
-      label: "플로리스트 연락처",
-      icon: "📞",
-      value: "010-xxxx-xxxx",
+      label: "픽업 예정 시간",
+      icon: <Clock size={18} color={iconColor} className="mr-2" />,
+      value: formattedDate,
+      sub: formattedTime,
       bold: true,
     },
     {
       label: "플로리스트에게 요청 사항",
-      icon: "📝",
-      value: "없음",
+      icon: <MessageCircle size={18} color={iconColor} className="mr-2" />,
+      value: order?.request || "없음",
       bold: true,
     },
   ];
@@ -29,7 +53,7 @@ export default function OrderPickTime() {
       className="rounded-xl border bg-white p-6 overflow-hidden"
       style={{ borderColor: "#EBEBEA" }}
     >
-      {/* 픽업 정보 영역 */}
+      {/* 픽업 정보 */}
       <div className="text-sm">
         {items.map((item, idx) => (
           <div
@@ -40,7 +64,7 @@ export default function OrderPickTime() {
             style={idx !== items.length - 1 ? { borderColor: "#EBEBEA" } : {}}
           >
             <span className="text-[#5b5967] flex items-center pl-1">
-              <span className="mr-2">{item.icon}</span>
+              {item.icon}
               {item.label}
             </span>
             <span
@@ -59,7 +83,7 @@ export default function OrderPickTime() {
         ))}
       </div>
 
-      {/* 프로그레스 바 + 안내문 */}
+      {/* 픽업 진행 상태 */}
       <div className="mt-10 text-center">
         <p className="text-md font-bold text-[#5b5967] mb-5">
           현재 플로리스트가 꽃을 정성껏 포장중이에요!

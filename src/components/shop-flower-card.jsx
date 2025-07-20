@@ -14,6 +14,7 @@ export default function ShopFlowerCard({
   symbolism,
   slug,
   price,
+  stockId,
 }) {
   const [count, setCount] = useState(1);
   const setCartItemCount = useSetAtom(cartItemCountAtom);
@@ -54,6 +55,7 @@ export default function ShopFlowerCard({
           count,
           shop,
           price: price * count,
+          stockId: stockId,
         },
       ];
     });

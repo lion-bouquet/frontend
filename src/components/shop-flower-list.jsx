@@ -23,6 +23,7 @@ export default function ShopFlowerList({ shopFlowerList }) {
             symbolism={item.flower.floriography}
             slug={item.stockId.toString()}
             price={item.price}
+            stockId={item.stockId}
           />
         );
       })}
