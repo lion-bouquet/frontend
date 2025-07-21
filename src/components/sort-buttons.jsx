@@ -54,7 +54,7 @@ export default function SortButtons({
           </button>
         ))}
       </div>
-      {/* 오른쪽: 도/시 버튼 */}
+      {/* 오른쪽: 도/시 */}
       <div className="flex gap-2">
         {cityButtons.map(({ id, label }) => (
           <button
