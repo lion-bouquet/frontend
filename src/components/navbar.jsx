@@ -17,9 +17,13 @@ export default function Navbar() {
     <nav className="w-full bg-white border-b border-[#EBEBEAFF] shadow-sm">
       <div className="max-w-screen-xl mx-auto flex items-center px-4 py-3">
         <div className="flex items-center space-x-2">
-          <img src="/logo.svg" alt="Logo" className="w-6 h-6" />
+          <img
+            src="/image/alogo.png"
+            alt="Logo"
+            className="w-12 h-12 mb-2 mr-[-2px]"
+          />
           <Link href={"/home"}>
-            <span className="font-bold text-lg cursor-pointer">꽃 길</span>
+            <span className="font-bold text-lg cursor-pointer">Bloomee!</span>
           </Link>
         </div>
 

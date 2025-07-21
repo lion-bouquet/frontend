@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Store,
-  MessageSquareText,
-  Star,
-  ShoppingCart,
-} from "lucide-react";
+import { Store, MessageSquareText, Star, ShoppingCart } from "lucide-react";
 import clsx from "clsx";
 
 const sortButtons = [
@@ -13,11 +8,6 @@ const sortButtons = [
   { id: "review", label: "리뷰 많은 순", icon: MessageSquareText },
   { id: "rating", label: "평점 높은 순", icon: Star },
   { id: "order", label: "주문 많은 순", icon: ShoppingCart },
-];
-
-const cityButtons = [
-  { id: "do", label: "도" },
-  { id: "si", label: "시" },
 ];
 
 export default function SortButtons({
@@ -50,23 +40,6 @@ export default function SortButtons({
             }
           >
             <Icon className="w-4 h-4" />
-            {label}
-          </button>
-        ))}
-      </div>
-      {/* 오른쪽: 도/시 */}
-      <div className="flex gap-2">
-        {cityButtons.map(({ id, label }) => (
-          <button
-            key={id}
-            onClick={() => onChangeCity(id)}
-            className={clsx(
-              "px-4 py-1.5 text-sm rounded-full border transition shadow-sm cursor-pointer hover:opacity-90 active:scale-95",
-              selectedCity === id
-                ? "border-violet-400 text-violet-600 font-medium"
-                : "border-gray-200 text-gray-500 hover:bg-gray-100"
-            )}
-          >
             {label}
           </button>
         ))}

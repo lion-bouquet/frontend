@@ -4,11 +4,7 @@ import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 
 export default function HomeImg() {
-  const images = [
-    "/image/dummy-img.png",
-    "/image/dummy-img2.jpeg",
-    "/image/dummy-img3.jpeg",
-  ];
+  const images = ["/image/alsb.png", "/image/aspg.png", "/image/asyr.png"];
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
 

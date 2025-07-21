@@ -6,6 +6,7 @@ import OrderThankYouHeader from "@/components/order-confirmation/order-thank-you
 import OrderSummary from "@/components/order-confirmation/order-summary";
 import OrderItemList from "@/components/order-confirmation/order-item-list";
 import OrderPickTime from "@/components/order-confirmation/order-pick-time";
+import LoadingSpinner from "@/components/loading-spinner";
 
 export default function OrderConfirmationPage() {
   const searchParams = useSearchParams();
@@ -39,7 +40,12 @@ export default function OrderConfirmationPage() {
     fetchOrder();
   }, [orderCode]);
 
-  if (!order) return <div className="p-8">주문 정보를 불러오는 중...</div>;
+  if (!order)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner />
+      </div>
+    );
 
   return (
     <div className="px-6 py-10 min-h-screen font-sans">

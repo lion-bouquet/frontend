@@ -10,17 +10,18 @@ export default function ShopIntroduction({ shop }) {
         </p>
 
         {shop.images?.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
             {shop.images.map((img, i) => (
-              <Image
-                key={i}
-                src={img}
-                alt={`shop-img-${i}`}
-                width={300}
-                height={200}
-                className="rounded-lg object-cover h-32 w-full"
-                sizes="(max-width: 768px) 100vw, 25vw"
-              />
+              <div key={i} className="w-full">
+                <Image
+                  src={img}
+                  alt={`shop-img-${i}`}
+                  width={400}
+                  height={300}
+                  className="rounded-xl object-cover w-full h-36"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
             ))}
           </div>
         )}
