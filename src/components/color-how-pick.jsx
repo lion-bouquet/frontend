@@ -1,21 +1,21 @@
 export default function ColorHowPick() {
   const insights = [
     {
-      title: "Monochromatic Harmony",
+      title: "단색  조화",
       description:
-        "Explore the beauty of using various shades and tints of a single color for depth and sophistication.",
-      icon: "🌀",
-    },
-    {
-      title: "Complementary Contrasts",
-      description:
-        "Learn how opposing colors on the color wheel can create striking and dynamic visual impact.",
+        "하나의 색상을 다양한 명도와 채도로 표현하여 깊이감 있고 세련된 아름다움을 탐구해보세요.",
       icon: "🎨",
     },
     {
-      title: "Analogous Flow",
+      title: "보색 대비",
       description:
-        "Discover the calming effect of colors that are next to each other on the color wheel, creating smooth transitions.",
+        "색상환에서 서로 반대편에 위치한 색들을 사용해 강렬하고 역동적인 시각적 효과를 연출하는 방법을 알아보세요.",
+      icon: "🌀",
+    },
+    {
+      title: "유사색 흐름",
+      description:
+        "색상환에서 이웃한 색들로 부드럽고 자연스러운 전환 효과를 만들어내는 차분한 조화의 매력을 발견해보세요.",
       icon: "🧩",
     },
   ];
